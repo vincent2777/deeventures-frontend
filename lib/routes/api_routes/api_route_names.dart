@@ -3,7 +3,7 @@
 */
 // const String baseURL = "http://10.0.2.2:5000/api/v1"; //  Emulator
 // const String baseURL = "http://192.168.0.35:5000/api/v1"; // Development
-const String baseURL = "http://192.168.216.250:5000/api/v1"; // Development
+const String baseURL = "http://192.168.53.250:5000/api/v1"; // Development
 // const String baseURL = "https://deeventures.com/api/v1";  // Production
 
 
@@ -26,6 +26,7 @@ const String getTopTradersRoute = "/users/get_top_traders";
 */
 const String getUserWalletRoute = "/wallets/user_wallet";
 const String getUserReferralWalletRoute = "/wallets/user_referral_wallet";
+const String depositMoneyRoute = "/wallets/deposit_money";
 
 /*
 * Cryptocurrency API Routes.
@@ -74,10 +75,10 @@ const String getTransactionsRoute = "/transactions/all_transactions";
 /*
 * Settings API Routes.
 */
-const String getSettingRoute = "/settings/setting";
 
 
 /*
 * General API Routes.
 */
+const String getAccountSettingRoute = "/settings/setting";
 const String uploadTransactionProofRoute = "/transactions/upload_transaction_proof";

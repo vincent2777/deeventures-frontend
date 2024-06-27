@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-Settings settingFromJson(Map<String, dynamic> json) => Settings.fromJson(json);
+AccountSettings settingFromJson(Map<String, dynamic> json) => AccountSettings.fromJson(json);
 
-String settingToJson(Settings data) => json.encode(data.toJson());
+String settingToJson(AccountSettings data) => json.encode(data.toJson());
 
-class Settings {
+class AccountSettings {
   int? id;
   int? kyclevel1MaxWithdrawal;
   int? kyclevel2MaxWithdrawal;
@@ -12,6 +12,7 @@ class Settings {
   int? referralCommission;
   String? accountBank;
   String? accountNumber;
+  String? accountName;
   String? depositInstructions;
   int? minWithdrawal;
   String? clubkonectApi;
@@ -20,7 +21,7 @@ class Settings {
   DateTime? createdAt;
   DateTime? updatedAt;
 
-  Settings({
+  AccountSettings({
     this.id,
     this.kyclevel1MaxWithdrawal,
     this.kyclevel2MaxWithdrawal,
@@ -28,6 +29,7 @@ class Settings {
     this.referralCommission,
     this.accountBank,
     this.accountNumber,
+    this.accountName,
     this.depositInstructions,
     this.minWithdrawal,
     this.clubkonectApi,
@@ -37,7 +39,7 @@ class Settings {
     this.updatedAt,
   });
 
-  factory Settings.fromJson(Map<String, dynamic> json) => Settings(
+  factory AccountSettings.fromJson(Map<String, dynamic> json) => AccountSettings(
     id: json["id"],
     kyclevel1MaxWithdrawal: json["kyclevel1_max_withdrawal"],
     kyclevel2MaxWithdrawal: json["kyclevel2_max_withdrawal"],
@@ -45,6 +47,7 @@ class Settings {
     referralCommission: json["referral_commission"],
     accountBank: json["account_bank"],
     accountNumber: json["account_number"],
+    accountName: json["account_name"],
     depositInstructions: json["deposit_instructions"],
     minWithdrawal: json["min_withdrawal"],
     clubkonectApi: json["clubkonect_api"],
@@ -62,6 +65,7 @@ class Settings {
     "referral_commission": referralCommission,
     "account_bank": accountBank,
     "account_number": accountNumber,
+    "account_name": accountName,
     "deposit_instructions": depositInstructions,
     "min_withdrawal": minWithdrawal,
     "clubkonect_api": clubkonectApi,
