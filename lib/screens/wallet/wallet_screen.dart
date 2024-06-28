@@ -1,3 +1,5 @@
+import 'package:deeventures/screens/wallet/widgets/deposit_money_bottom_sheet_widget.dart';
+import 'package:deeventures/screens/wallet/widgets/withdraw_money_bottom_sheet_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -164,7 +166,9 @@ class WalletScreen extends StatelessWidget {
                                           width: 50.0,
                                           padding: const EdgeInsets.all(1.0),
                                           child: IconButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              WithdrawMoneyBottomSheetWidget.withdrawMoneyBottomSheetWidget();
+                                            },
                                             color: const Color(0XFF59C88A),
                                             padding: EdgeInsets.zero,
                                             icon: const Icon(
@@ -201,7 +205,9 @@ class WalletScreen extends StatelessWidget {
                                           width: 50.0,
                                           padding: const EdgeInsets.all(1.0),
                                           child: IconButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              DepositMoneyBottomSheetWidget.depositMoneyBottomSheetWidget();
+                                            },
                                             color: const Color(0XFF59C88A),
                                             padding: EdgeInsets.zero,
                                             icon: const Icon(

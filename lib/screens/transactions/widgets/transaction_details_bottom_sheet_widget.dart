@@ -241,7 +241,7 @@ class TransactionDetailsBottomSheetWidget {
                                 const Spacer(),
 
                                 Text(
-                                  formatter.format(controller.transaction.toReceive!),
+                                  "₦${formatter.format(controller.transaction.toReceive!)}",
                                   style: TextStyle(
                                     color: Colors.grey.shade700,
                                     fontFamily: "Roboto",

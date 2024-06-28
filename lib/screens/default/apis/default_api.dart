@@ -2,7 +2,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-import '../../../routes/api_routes/api_route_names.dart';
 
 
 class AuthAPI {

@@ -8,7 +8,7 @@ import '../models/cableTV_model.dart';
 
 
 class TVWidget extends StatelessWidget {
-  TVWidget(this.controller, this.formKey, {super.key});
+  const TVWidget(this.controller, this.formKey, {super.key});
 
   final GlobalKey<FormState> formKey;
   final BillPaymentStateController controller;

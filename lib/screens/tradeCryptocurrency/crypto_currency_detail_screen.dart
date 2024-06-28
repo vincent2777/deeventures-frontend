@@ -2,7 +2,6 @@ import 'package:deeventures/screens/tradeCryptocurrency/widgets/sell_crypto_bott
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:interactive_chart/interactive_chart.dart';
 
 import '../../routes/api_routes/api_route_names.dart';
 import 'controllers/trade_cryptocurrency_state_controller.dart';
