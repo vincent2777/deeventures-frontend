@@ -1,5 +1,6 @@
 import 'package:deeventures/screens/billPayment/models/internet_service_provider_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -246,7 +247,7 @@ class InternetWidget extends StatelessWidget {
           Row(
             children: [
               const Text(
-                "Total Amount",
+                "Amount",
               ),
               const Spacer(),
 
@@ -257,13 +258,15 @@ class InternetWidget extends StatelessWidget {
                     const Text(
                       "Commission: ",
                       style: TextStyle(
-                          fontSize: 12.0
+                          fontSize: 12.0,
+                        color: Colors.red
                       ),
                     ),
                     Text(
-                      "${controller.commissionPrice}",
+                      "${controller.commissionPrice.toString().replaceAll(".0", "")}%",
                       style: const TextStyle(
-                          fontSize: 12.0
+                          fontSize: 12.0,
+                          color: Colors.red
                       ),
                     ),
                   ],
@@ -319,10 +322,11 @@ class InternetWidget extends StatelessWidget {
                 fontSize: 14.0,
               ),
               prefix: const Text(
-                "₦",
+                "₦  ",
                 style: TextStyle(
                   color: Colors.black54,
-                  fontSize: 16.0,
+                  fontSize: 14.0,
+                  fontFamily: 'Roboto'
                 ),
               ),
             ),
@@ -330,7 +334,7 @@ class InternetWidget extends StatelessWidget {
           const SizedBox(height: 40.0),
 
           //  Proceed Button.
-          (!controller.isLoading) ? (
+
               TextButton(
                 onPressed: () {
                   (formKey.currentState!.validate()) ? (
@@ -351,41 +355,22 @@ class InternetWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(7.0),
                     color: const Color(0XFF07B46B),
                   ),
-                  child: const Text(
-                    "PROCEED",
-                    style: TextStyle(
+                  child: (!controller.isLoading) ? (
+                   Text(
+                    "PAY ₦${controller.totalPrice}",
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16.0,
+                        fontFamily: 'Roboto',
                         fontWeight: FontWeight.w600
                     ),
+                  )
+                  ) : const SpinKitCircle(
+                    color: Colors.white,
+                    size: 40,
                   ),
                 ),
               )
-          ) : (
-              TextButton(
-                onPressed: () {},
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.zero,
-                ),
-                child: Container(
-                  height: 50.0,
-                  width: Get.width,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(7.0),
-                    color: Colors.grey.shade300,
-                  ),
-                  child: const Text(
-                    "PROCEED",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w600
-                    ),
-                  ),
-                ),
-              )
-          )
         ],
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -167,7 +168,7 @@ class AirtimeWidget extends StatelessWidget {
             },
             controller: controller.amountTextEditingController,
             keyboardType: TextInputType.number,
-            validator: ValidationBuilder().minLength(3).required().build(),
+            validator: ValidationBuilder().minLength(2).required().build(),
             autovalidateMode: controller.autoValidateMode,
             decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(
@@ -207,10 +208,11 @@ class AirtimeWidget extends StatelessWidget {
                 fontSize: 14.0,
               ),
               prefix: const Text(
-                "₦",
+                "NGN  ",
                 style: TextStyle(
                   color: Colors.black54,
-                  fontSize: 16.0,
+                  fontSize: 14.0,
+                  fontFamily: "Manrope"
                 ),
               ),
             ),
@@ -270,7 +272,7 @@ class AirtimeWidget extends StatelessWidget {
           const SizedBox(height: 40.0),
 
           //  Proceed Button.
-          (!controller.isLoading) ? (
+
             TextButton(
             onPressed: () {
               (formKey.currentState!.validate()) ? (
@@ -291,40 +293,20 @@ class AirtimeWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(7.0),
                 color: const Color(0XFF07B46B),
               ),
-              child: const Text(
-                "PROCEED",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w600
-                ),
-              ),
+              child:  (!controller.isLoading) ? (
+                  const Text(
+                    "PROCEED",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.w600
+                    ),
+                  ))
+                      : const SpinKitCircle(
+                color: Colors.white,
+                size: 40,
+              )
             ),
-          )
-          ) : (
-            TextButton(
-              onPressed: () {},
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.zero,
-              ),
-              child: Container(
-                height: 50.0,
-                width: Get.width,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(7.0),
-                  color: Colors.grey.shade300,
-                ),
-                child: const Text(
-                  "PROCEED",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w600
-                  ),
-                ),
-              ),
-            )
           )
         ],
       ),

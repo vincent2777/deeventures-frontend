@@ -1,12 +1,12 @@
 import 'package:deeventures/screens/billPayment/models/electric_company_model.dart';
 import 'package:deeventures/screens/billPayment/models/meterType_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../controller/bill_payment_state_controller.dart';
-
 
 class ElectricityWidget extends StatelessWidget {
   const ElectricityWidget(this.controller, this.formKey, {super.key});
@@ -21,7 +21,6 @@ class ElectricityWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
           const Text(
             "Service Provider",
           ),
@@ -35,7 +34,8 @@ class ElectricityWidget extends StatelessWidget {
             },
             focusNode: FocusNode(),
             icon: const Icon(Iconsax.arrow_down_1),
-            items: controller.electricCompanies.map((ElectricCompany electricCompany) {
+            items: controller.electricCompanies
+                .map((ElectricCompany electricCompany) {
               return DropdownMenuItem<ElectricCompany>(
                 value: electricCompany,
                 child: Row(
@@ -47,7 +47,7 @@ class ElectricityWidget extends StatelessWidget {
                         height: 27.0,
                         width: 27.0,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(11.0),
+                          borderRadius: BorderRadius.circular(11.0),
                         ),
                         child: Center(
                           child: Text(
@@ -60,7 +60,6 @@ class ElectricityWidget extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 20.0),
-
                     Text(
                       electricCompany.name!,
                       overflow: TextOverflow.ellipsis,
@@ -98,7 +97,8 @@ class ElectricityWidget extends StatelessWidget {
                   width: 2.0,
                 ),
               ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 0.0),
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 0.0),
               filled: true,
               fillColor: Colors.white,
               hintText: "Choose Service Provider",
@@ -166,7 +166,8 @@ class ElectricityWidget extends StatelessWidget {
                   width: 2.0,
                 ),
               ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 0.0),
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 0.0),
               filled: true,
               fillColor: Colors.white,
               hintText: "Choose Service Provider",
@@ -192,6 +193,7 @@ class ElectricityWidget extends StatelessWidget {
             onChanged: (value) {
               controller.setMeterNumber(value);
             },
+            focusNode: controller.meterNoFocusNode,
             keyboardType: TextInputType.number,
             validator: ValidationBuilder().required().build(),
             autovalidateMode: controller.autoValidateMode,
@@ -224,7 +226,8 @@ class ElectricityWidget extends StatelessWidget {
                   width: 2.0,
                 ),
               ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 0.0),
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 0.0),
               filled: true,
               fillColor: Colors.white,
               hintText: "123456789",
@@ -235,29 +238,35 @@ class ElectricityWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 15.0),
-
+          (controller.meterOwnerName.isNotEmpty ?
+          (Text(
+            controller.meterOwnerName,
+            style: const TextStyle(
+              color: Colors.green,
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+              overflow: TextOverflow.ellipsis
+            ),
+          )) : const SizedBox()),
+          const SizedBox(height: 20.0),
           Row(
             children: [
               const Text(
                 "Amount",
               ),
               const Spacer(),
-
               Visibility(
                 visible: controller.commissionRate > 0.0,
                 child: Row(
                   children: [
                     const Text(
-                      "Commission: ",
-                      style: TextStyle(
-                          fontSize: 12.0
-                      ),
+                      "Convenience Fee: ",
+                      style: TextStyle(fontSize: 12.0),
                     ),
                     Text(
-                      "${controller.commissionRate.toInt()}%",
-                      style: const TextStyle(
-                          fontSize: 12.0
-                      ),
+                      "₦${controller.commissionRate.toInt()}",
+                      style:
+                          const TextStyle(fontSize: 12.0, fontFamily: 'Roboto'),
                     ),
                   ],
                 ),
@@ -301,14 +310,15 @@ class ElectricityWidget extends StatelessWidget {
                   width: 2.0,
                 ),
               ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 0.0),
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 0.0),
               filled: true,
               fillColor: Colors.white,
               hintText: "₦0.0",
               hintStyle: TextStyle(
-                color: Colors.grey.shade400,
-                fontSize: 14.0,
-              ),
+                  color: Colors.grey.shade400,
+                  fontSize: 14.0,
+                  fontFamily: 'Roboto'),
             ),
           ),
           const SizedBox(height: 15.0),
@@ -353,7 +363,8 @@ class ElectricityWidget extends StatelessWidget {
                   width: 2.0,
                 ),
               ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 0.0),
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 0.0),
               filled: true,
               fillColor: Colors.white,
               hintText: "0800000000",
@@ -363,80 +374,46 @@ class ElectricityWidget extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 10.0),
 
-          Row(
-            children: [
-              const Text(
-                "Total amount to pay: "
-              ),
-              Text(
-                "₦${controller.totalPrice}",
-                style: TextStyle(
-                  color: Colors.grey.shade700,
-                  fontWeight: FontWeight.w600
-                ),
-              ),
-            ],
-          ),
           const SizedBox(height: 30.0),
 
           //  Proceed Button.
-          (!controller.isLoading) ? (
-              TextButton(
-                onPressed: () {
-                  (formKey.currentState!.validate()) ? (
-                      controller.buyElectricity()
-                  ) : ({
-                    controller.setAutoValidateMode(),
-                    controller.appToastWidget.notification("Note!", "Please fill all the required fields.", 'Warning'),
-                  });
-                },
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.zero,
-                ),
-                child: Container(
-                  height: 50.0,
-                  width: Get.width,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(7.0),
-                    color: const Color(0XFF07B46B),
-                  ),
-                  child: const Text(
-                    "PROCEED",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w600
+
+          TextButton(
+            onPressed: () {
+              (formKey.currentState!.validate())
+                  ? (controller.buyElectricity())
+                  : ({
+                      controller.setAutoValidateMode(),
+                      controller.appToastWidget.notification("Note!",
+                          "Please fill all the required fields.", 'Warning'),
+                    });
+            },
+            style: TextButton.styleFrom(
+              padding: EdgeInsets.zero,
+            ),
+            child: Container(
+              height: 50.0,
+              width: Get.width,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(7.0),
+                color: const Color(0XFF07B46B),
+              ),
+              child: (!controller.isLoading)
+                  ? (Text(
+                      "PAY ₦${controller.totalPrice}",
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16.0,
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w600),
+                    ))
+                  : const SpinKitCircle(
+                      color: Colors.white,
+                      size: 40,
                     ),
-                  ),
-                ),
-              )
-          ) : (
-              TextButton(
-                onPressed: () {},
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.zero,
-                ),
-                child: Container(
-                  height: 50.0,
-                  width: Get.width,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(7.0),
-                    color: Colors.grey.shade300,
-                  ),
-                  child: const Text(
-                    "PROCEED",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w600
-                    ),
-                  ),
-                ),
-              )
+            ),
           )
         ],
       ),

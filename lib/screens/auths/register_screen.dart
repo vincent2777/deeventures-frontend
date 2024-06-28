@@ -53,7 +53,7 @@ class RegisterScreen extends StatelessWidget {
                       const Padding(
                           padding: EdgeInsets.only(left: 20.0),
                           child: Text(
-                            "Create your Deeventures Exchange Account",
+                            "Create your Deeventures Account",
                             style: TextStyle(
                               color: Colors.white54,
                               fontSize: 13.0,

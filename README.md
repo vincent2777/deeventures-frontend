@@ -1,4 +1,4 @@
-# dee_ventures_mobile
+# deeventures
 
 DeeVenturesMobile is a Crypto currency application.
 

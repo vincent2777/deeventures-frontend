@@ -25,148 +25,151 @@ class TransactionsScreen extends StatelessWidget {
         child: SizedBox(
           height: Get.height,
           width: Get.width,
-          child: Column(
-            children: [
+          child: Container(
+            color: Colors.white,
+            child: Column(
+              children: [
+                // Header Bar
+                Container(
+                  height: 65.0,
+                  width: Get.width,
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 0.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Builder(builder: (context) {
+                        // this uses the new context to open the drawer properly provided by the Builder
+                        return IconButton(
+                          onPressed: () {
+                            Scaffold.of(context).openDrawer();
+                          },
+                          icon: Icon(
+                            Iconsax.textalign_justifycenter,
+                            color: Colors.grey.shade800,
+                            size: 25,
+                          ),
+                        );
+                      }),
 
-              // Header Bar
-              Container(
-                height: 65.0,
-                width: Get.width,
-                padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 0.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Builder(builder: (context) {
-                      // this uses the new context to open the drawer properly provided by the Builder
-                      return IconButton(
-                        onPressed: () {
-                          Scaffold.of(context).openDrawer();
-                        },
-                        icon: Icon(
-                          Iconsax.textalign_justifycenter,
-                          color: Colors.grey.shade800,
-                          size: 25,
+                      Text(
+                        "Transaction History",
+                        style: TextStyle(
+                            color: Colors.grey.shade700,
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w700
+                        ),
+                      ),
+
+                      const SizedBox(
+                        height: 10.0,
+                        width: 40.0,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 5.0),
+
+                // Search Box
+                Container(
+                  height: 50.0,
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: DropdownButtonFormField<String>(
+                    onChanged: (value) {
+                      controller.setTransactionType(value);
+                    },
+                    focusNode: FocusNode(),
+                    icon: const Icon(Iconsax.arrow_down_1),
+                    items: controller.transactionTypes.map((TransactionType transactionType) {
+                      return DropdownMenuItem<String>(
+                        value: transactionType.value,
+                        child: Text(
+                          transactionType.label!,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       );
-                    }),
-
-                    Text(
-                      "Transaction History",
-                      style: TextStyle(
-                        color: Colors.grey.shade700,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w700
+                    }).toList(),
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey.shade300,
+                          width: 1,
+                        ),
                       ),
-                    ),
-
-                    const SizedBox(
-                      height: 10.0,
-                      width: 40.0,
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 5.0),
-
-              // Search Box
-              Container(
-                height: 50.0,
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: DropdownButtonFormField<String>(
-                  onChanged: (value) {
-                    controller.setTransactionType(value);
-                  },
-                  focusNode: FocusNode(),
-                  icon: const Icon(Iconsax.arrow_down_1),
-                  items: controller.transactionTypes.map((TransactionType transactionType) {
-                    return DropdownMenuItem<String>(
-                      value: transactionType.value,
-                      child: Text(
-                        transactionType.label!,
-                        overflow: TextOverflow.ellipsis,
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: const BorderSide(
+                          color: Color(0xFFFF9191),
+                          width: 1,
+                        ),
                       ),
-                    );
-                  }).toList(),
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: BorderSide(
-                        color: Colors.grey.shade300,
-                        width: 1,
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: const BorderSide(
+                          color: Color(0XFF07B46B),
+                          width: 2.0,
+                        ),
                       ),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(
-                        color: Color(0xFFFF9191),
-                        width: 1,
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                        borderSide: const BorderSide(
+                          color: Color(0xFFFF9191),
+                          width: 2.0,
+                        ),
                       ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(
-                        color: Color(0XFF07B46B),
-                        width: 2.0,
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
+                      filled: true,
+                      fillColor: Colors.white,
+                      hintText: "Transaction Type",
+                      hintStyle: TextStyle(
+                        color: Colors.grey.shade400,
+                        fontSize: 15.0,
                       ),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0),
-                      borderSide: const BorderSide(
-                        color: Color(0xFFFF9191),
-                        width: 2.0,
-                      ),
-                    ),
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
-                    filled: true,
-                    fillColor: Colors.white,
-                    hintText: "Transaction Type",
-                    hintStyle: TextStyle(
-                      color: Colors.grey.shade400,
-                      fontSize: 15.0,
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 10.0),
+                const SizedBox(height: 10.0),
 
-              Container(
-                height: 50.0,
-                width: Get.width,
-                color: Colors.grey.shade100,
-                child: TabBar(
-                  controller: controller.tabController,
-                  indicatorColor: const Color(0XFF09A060),
-                  indicatorPadding: const EdgeInsets.symmetric(vertical: 10.0),
-                  indicatorSize: TabBarIndicatorSize.tab,
-                  dividerColor: Colors.transparent,
-                  unselectedLabelColor: Colors.grey.shade500,
-                  labelColor: const Color(0XFF09A060),
-                  labelPadding: EdgeInsets.zero,
-                  labelStyle: const TextStyle(
-                    fontWeight: FontWeight.w500,
+                Container(
+                  height: 50.0,
+                  width: Get.width,
+                  color: Colors.white,
+                  child: TabBar(
+                    controller: controller.tabController,
+                    indicatorColor: const Color(0XFF09A060),
+                    indicatorPadding: const EdgeInsets.symmetric(vertical: 10.0),
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    // dividerColor: Colors.transparent,
+                    unselectedLabelColor: Colors.grey.shade500,
+                    labelColor: const Color(0XFF09A060),
+                    labelPadding: EdgeInsets.zero,
+                    labelStyle: const TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontFamily: 'Roboto'
+                    ),
+                    tabs: const [
+                      Tab(text: "All"),
+                      Tab(text: "Approved"),
+                      Tab(text: "Pending"),
+                      Tab(text: "Declined"),
+                    ],
                   ),
-                  tabs: const [
-                    Tab(text: "All"),
-                    Tab(text: "Approved"),
-                    Tab(text: "Pending"),
-                    Tab(text: "Declined"),
-                  ],
                 ),
-              ),
-              const SizedBox(height: 10.0),
+                const SizedBox(height: 10.0),
 
-              Expanded(
-                child: TabBarView(
-                  controller: controller.tabController,
-                  children: [
-                    _buildPagedListView(controller),
-                    _buildPagedListView(controller),
-                    _buildPagedListView(controller),
-                    _buildPagedListView(controller),
-                  ],
-                ),
-              )
-            ],
+                Expanded(
+                  child: TabBarView(
+                    controller: controller.tabController,
+                    children: [
+                      _buildPagedListView(controller),
+                      _buildPagedListView(controller),
+                      _buildPagedListView(controller),
+                      _buildPagedListView(controller),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       );
@@ -178,8 +181,8 @@ class TransactionsScreen extends StatelessWidget {
       onRefresh: () async {
         controller.pagingController.refresh();
       },
-      backgroundColor: Colors.green.shade300,
-      color: Colors.green.shade50,
+      backgroundColor: Colors.white,
+      color: Colors.white,
       child: PagedListView<int, Transaction>(
         pagingController: controller.pagingController,
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 0.0),
@@ -193,8 +196,14 @@ class TransactionsScreen extends StatelessWidget {
               child: Container(
                 margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 0.0),
                 decoration: BoxDecoration(
-                    color: Colors.blueGrey.withOpacity(0.05),
-                    borderRadius: BorderRadius.circular(10.0)
+                    color: Colors.white,
+                  borderRadius: BorderRadius.circular(14),
+                  boxShadow: const [
+                    BoxShadow(
+                        color: Color.fromARGB(15, 50, 50, 50),
+                        blurRadius: 15.0,
+                        offset: Offset(0, 2))
+                  ],
                 ),
                 padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
 
@@ -205,8 +214,8 @@ class TransactionsScreen extends StatelessWidget {
                       backgroundColor: (item.trnxStatus == 0)
                           ? const Color(0xffE0E0E0)
                           : (item.trnxStatus == 1)
-                          ? const Color(0xffe9ffe7)
-                          : (const Color(0xffFFDCDC)),
+                          ? const Color(0xffe9ffe7).withOpacity(0.4)
+                          : (const Color(0xffFFDCDC).withOpacity(0.4)),
                       radius: 25.0,
                       child: Icon(
                         (item.trnxStatus == 0)
@@ -273,8 +282,8 @@ class TransactionsScreen extends StatelessWidget {
                               color: (item.trnxStatus == 0)
                                   ? const Color(0xffE0E0E0)
                                   : (item.trnxStatus == 1)
-                                  ? const Color(0xffe9ffe7)
-                                  : (const Color(0xffFFDCDC)),
+                                  ? const Color(0xffe9ffe7).withOpacity(0.4)
+                                  : (const Color(0xffFFDCDC).withOpacity(0.4)),
                               borderRadius: BorderRadius.circular(10.0)
                           ),
                           child: Text(

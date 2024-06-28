@@ -1,3 +1,5 @@
+import 'package:deeventures/screens/auths/controllers/login_state_controller.dart';
+import 'package:deeventures/screens/dashboard/controllers/dashboard_state_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,6 +9,7 @@ class MakeMoneyScreen extends StatelessWidget {
   MakeMoneyScreen({super.key});
 
   final MakeMoneyStateController makeMoneyStateController = Get.put(MakeMoneyStateController());
+  final DashboardStateController dashboardStateController = Get.put(DashboardStateController());
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +61,7 @@ class MakeMoneyScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.grey.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(4)),
-                    child: const Text("https://app.deeventuresexchange.com"),
+                    child: const Text("https://app.deeventures.com.ng/?ref="),
                   ),
                   const SizedBox(height: 30.0),
 
@@ -75,7 +78,7 @@ class MakeMoneyScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.grey.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(4)),
-                    child: const Text("vindee20"),
+                    child: Text(dashboardStateController.user.username!),
                   ),
                   const SizedBox(height: 30.0),
 

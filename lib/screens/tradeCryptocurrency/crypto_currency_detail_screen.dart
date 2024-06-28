@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:interactive_chart/interactive_chart.dart';
 
+import '../../routes/api_routes/api_route_names.dart';
 import 'controllers/trade_cryptocurrency_state_controller.dart';
 import 'models/currency_model.dart';
 
@@ -55,14 +56,14 @@ class CryptocurrencyDetailScreen extends StatelessWidget {
                     textBaseline: TextBaseline.ideographic,
                     children: [
                       Text(
-                        "${controller.currency.currencyPrice}",
+                        "${controller.currency.currencyBuyRate}",
                         style: const TextStyle(
                           fontSize: 28.0,
                           fontWeight: FontWeight.w500
                         ),
                       ),
                       Text(
-                        "USD",
+                        "NGN",
                         style: TextStyle(
                           color: Colors.grey.shade400
                         ),
@@ -71,27 +72,27 @@ class CryptocurrencyDetailScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 20.0),
 
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.baseline,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    textBaseline: TextBaseline.ideographic,
-                    children: [
-                      Text(
-                        "\$${controller.currency.currencyPrice}",
-                        style: const TextStyle(
-                            color: Color(0XFF07B46B),
-                          fontWeight: FontWeight.w800
-                        ),
-                      ),
-                      /*Text(
-                        "${controller.currency.currencyBuyRate}%",
-                        style: TextStyle(
-                          color: Colors.grey.shade400,
-                          fontSize: 13.0
-                        ),
-                      )*/
-                    ],
-                  ),
+                  // Row(
+                  //   crossAxisAlignment: CrossAxisAlignment.baseline,
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   textBaseline: TextBaseline.ideographic,
+                  //   children: [
+                  //     Text(
+                  //       "\$${controller.currency.currencyPrice}",
+                  //       style: const TextStyle(
+                  //           color: Color(0XFF07B46B),
+                  //         fontWeight: FontWeight.w800
+                  //       ),
+                  //     ),
+                  //     /*Text(
+                  //       "${controller.currency.currencyBuyRate}%",
+                  //       style: TextStyle(
+                  //         color: Colors.grey.shade400,
+                  //         fontSize: 13.0
+                  //       ),
+                  //     )*/
+                  //   ],
+                  // ),
                   const SizedBox(height: 20.0),
 
                   Container(
@@ -107,7 +108,7 @@ class CryptocurrencyDetailScreen extends StatelessWidget {
                         CircleAvatar(
                             backgroundColor: const Color(0xffE7F0FF),
                             radius: 20.0,
-                            child: Image.network(controller.currency.currencyImage!)
+                            child: Image.network(controller.currency.currencyImage!.replaceAll("../", imgBaseUrlDev))
                         ),
                         const SizedBox(width: 20.0,),
 
@@ -124,8 +125,16 @@ class CryptocurrencyDetailScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 5.0,),
 
+                            // Text(
+                            //   "${controller.currency.currencySellRate!}",
+                            //   style: TextStyle(
+                            //     color: Colors.grey.shade500,
+                            //     fontSize: 10.0,
+                            //     fontWeight: FontWeight.w400,
+                            //   ),
+                            // ),
                             Text(
-                              "${controller.currency.currencySellRate!}%",
+                              "${controller.currency.currencyBuyRate!}",
                               style: TextStyle(
                                 color: Colors.grey.shade500,
                                 fontSize: 10.0,
@@ -222,7 +231,7 @@ class CryptocurrencyDetailScreen extends StatelessWidget {
                         contentPadding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
                         filled: true,
                         fillColor: Colors.white,
-                        hintText: "Transaction Type",
+                        hintText: "Select Network",
                         hintStyle: TextStyle(
                           color: Colors.grey.shade400,
                           fontSize: 15.0,
@@ -308,7 +317,7 @@ class CryptocurrencyDetailScreen extends StatelessWidget {
                         (controller.currencyNetwork.networkAddress != null) ? (
                             TextButton(
                               onPressed: () {
-                                SellCryptoBottomSheetWidget.tradeCryptocurrencyStateController();
+                                  SellCryptoBottomSheetWidget.tradeCryptocurrencyStateController();
                               },
                               style: TextButton.styleFrom(
                                 padding: EdgeInsets.zero,
@@ -374,131 +383,131 @@ class CryptocurrencyDetailScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 40.0),*/
 
-                        const Text(
-                          "Market",
-                          style: TextStyle(
-                              color: Colors.black54,
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.w600
-                          ),
-                        ),
-                        const SizedBox(height: 10.0),
+                        // const Text(
+                        //   "Market",
+                        //   style: TextStyle(
+                        //       color: Colors.black54,
+                        //       fontSize: 18.0,
+                        //       fontWeight: FontWeight.w600
+                        //   ),
+                        // ),
+                        // const SizedBox(height: 10.0),
 
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 12.0),
-                          decoration: BoxDecoration(
-                              color: Colors.grey.shade100,
-                              borderRadius: BorderRadius.circular(5.0)
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 10.0),
-                          child: Row(
-                            children: [
-
-                              const Icon(
-                                Iconsax.presention_chart5,
-                                color: Color(0XFF07B46B),
-                              ),
-                              const SizedBox(width: 15.0,),
-
-                              const Text(
-                                "Market Cap",
-                                style: TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              const Spacer(),
-
-                              Text(
-                                "41,228.00 BTC",
-                                style: TextStyle(
-                                  color: Colors.grey.shade400,
-                                  fontSize: 13.0,
-                                  fontWeight: FontWeight.w600
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 10.0),
-
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 12.0),
-                          decoration: BoxDecoration(
-                              color: Colors.grey.shade100,
-                              borderRadius: BorderRadius.circular(5.0)
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 10.0),
-                          child: Row(
-                            children: [
-
-                              const Icon(
-                                Iconsax.chart_35,
-                                color: Color(0XFF07B46B),
-                              ),
-                              const SizedBox(width: 15.0,),
-
-                              const Text(
-                                "Volume (24 h)",
-                                style: TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              const Spacer(),
-
-                              Text(
-                                "\$12,999.00",
-                                style: TextStyle(
-                                    color: Colors.grey.shade400,
-                                    fontSize: 13.0,
-                                    fontWeight: FontWeight.w600
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 10.0),
-
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 12.0),
-                          decoration: BoxDecoration(
-                              color: Colors.grey.shade100,
-                              borderRadius: BorderRadius.circular(5.0)
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 10.0),
-                          child: Row(
-                            children: [
-
-                              const Icon(
-                                Iconsax.chart_success5,
-                                color: Color(0XFF07B46B),
-                              ),
-                              const SizedBox(width: 15.0,),
-
-                              const Text(
-                                "Available Supply",
-                                style: TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              const Spacer(),
-
-                              Text(
-                                "9,779.64",
-                                style: TextStyle(
-                                    color: Colors.grey.shade400,
-                                    fontSize: 13.0,
-                                    fontWeight: FontWeight.w600
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
+                        // Container(
+                        //   margin: const EdgeInsets.only(bottom: 12.0),
+                        //   decoration: BoxDecoration(
+                        //       color: Colors.grey.shade100,
+                        //       borderRadius: BorderRadius.circular(5.0)
+                        //   ),
+                        //   padding: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 10.0),
+                        //   child: Row(
+                        //     children: [
+                        //
+                        //       const Icon(
+                        //         Iconsax.presention_chart5,
+                        //         color: Color(0XFF07B46B),
+                        //       ),
+                        //       const SizedBox(width: 15.0,),
+                        //
+                        //       const Text(
+                        //         "Market Cap",
+                        //         style: TextStyle(
+                        //           color: Colors.black54,
+                        //           fontSize: 15.0,
+                        //           fontWeight: FontWeight.w500,
+                        //         ),
+                        //       ),
+                        //       const Spacer(),
+                        //
+                        //       Text(
+                        //         "41,228.00 BTC",
+                        //         style: TextStyle(
+                        //           color: Colors.grey.shade400,
+                        //           fontSize: 13.0,
+                        //           fontWeight: FontWeight.w600
+                        //         ),
+                        //       )
+                        //     ],
+                        //   ),
+                        // ),
+                        // const SizedBox(height: 10.0),
+                        //
+                        // Container(
+                        //   margin: const EdgeInsets.only(bottom: 12.0),
+                        //   decoration: BoxDecoration(
+                        //       color: Colors.grey.shade100,
+                        //       borderRadius: BorderRadius.circular(5.0)
+                        //   ),
+                        //   padding: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 10.0),
+                        //   child: Row(
+                        //     children: [
+                        //
+                        //       const Icon(
+                        //         Iconsax.chart_35,
+                        //         color: Color(0XFF07B46B),
+                        //       ),
+                        //       const SizedBox(width: 15.0,),
+                        //
+                        //       const Text(
+                        //         "Volume (24 h)",
+                        //         style: TextStyle(
+                        //           color: Colors.black54,
+                        //           fontSize: 15.0,
+                        //           fontWeight: FontWeight.w500,
+                        //         ),
+                        //       ),
+                        //       const Spacer(),
+                        //
+                        //       Text(
+                        //         "\$12,999.00",
+                        //         style: TextStyle(
+                        //             color: Colors.grey.shade400,
+                        //             fontSize: 13.0,
+                        //             fontWeight: FontWeight.w600
+                        //         ),
+                        //       )
+                        //     ],
+                        //   ),
+                        // ),
+                        // const SizedBox(height: 10.0),
+                        //
+                        // Container(
+                        //   margin: const EdgeInsets.only(bottom: 12.0),
+                        //   decoration: BoxDecoration(
+                        //       color: Colors.grey.shade100,
+                        //       borderRadius: BorderRadius.circular(5.0)
+                        //   ),
+                        //   padding: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 10.0),
+                        //   child: Row(
+                        //     children: [
+                        //
+                        //       const Icon(
+                        //         Iconsax.chart_success5,
+                        //         color: Color(0XFF07B46B),
+                        //       ),
+                        //       const SizedBox(width: 15.0,),
+                        //
+                        //       const Text(
+                        //         "Available Supply",
+                        //         style: TextStyle(
+                        //           color: Colors.black54,
+                        //           fontSize: 15.0,
+                        //           fontWeight: FontWeight.w500,
+                        //         ),
+                        //       ),
+                        //       const Spacer(),
+                        //
+                        //       Text(
+                        //         "9,779.64",
+                        //         style: TextStyle(
+                        //             color: Colors.grey.shade400,
+                        //             fontSize: 13.0,
+                        //             fontWeight: FontWeight.w600
+                        //         ),
+                        //       )
+                        //     ],
+                        //   ),
+                        // ),
                       ],
                     ),
                   )

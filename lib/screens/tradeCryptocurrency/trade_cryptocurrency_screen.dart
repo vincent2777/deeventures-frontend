@@ -3,6 +3,7 @@ import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../routes/api_routes/api_route_names.dart';
 import '../../routes/app_routes/app_route_names.dart';
 import 'controllers/trade_cryptocurrency_state_controller.dart';
 
@@ -144,7 +145,7 @@ class TradeCryptocurrencyScreen extends StatelessWidget {
                                         CircleAvatar(
                                             backgroundColor: const Color(0xffE7F0FF),
                                             radius: 20.0,
-                                            child: Image.network(controller.currencies[index].currencyImage!)
+                                            child: Image.network(controller.currencies[index].currencyImage!.replaceAll("../", imgBaseUrlDev))
                                         ),
                                         const SizedBox(width: 20.0,),
 

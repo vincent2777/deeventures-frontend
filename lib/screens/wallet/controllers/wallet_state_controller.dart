@@ -73,6 +73,8 @@ class WalletStateController extends GetxController {
     String decodedToken = jsonDecode(token!);
     int userID = decodedLoggedInUser["id"];
 
+    print("decodedLoggedInUser $userID");
+
     var response = await WalletAPI.getUserWalletService(getUserWalletRoute, userID, decodedToken);
     bool isSuccess = response!.data["success"];
     String message = response.data["message"];

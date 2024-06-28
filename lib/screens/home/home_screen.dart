@@ -1,3 +1,4 @@
+import 'package:deeventures/screens/tradeGiftCard/trade_gift_card_screen.dart';
 import 'package:deeventures/screens/transactions/transactions_screen.dart';
 import 'package:deeventures/screens/wallet/wallet_screen.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class HomeScreen extends StatelessWidget {
   final List<Widget> screens = [
     DashboardScreen(),
     TransactionsScreen(),
-    DashboardScreen(),
+    TradeGiftCardScreen(),
     WalletScreen(),
   ];
 

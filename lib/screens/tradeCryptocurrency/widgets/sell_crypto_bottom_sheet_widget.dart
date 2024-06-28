@@ -64,7 +64,7 @@ class SellCryptoBottomSheetWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Enter Amount",
+                                    "Enter Amount (\$)",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       color: Colors.grey.shade800,
@@ -131,17 +131,19 @@ class SellCryptoBottomSheetWidget {
                                           color: Colors.grey.shade700,
                                           fontSize: 15.0,
                                           fontWeight: FontWeight.w600,
+                                          fontFamily: 'Roboto'
                                         ),
                                       ),
                                       const SizedBox(width: 10.0,),
 
                                       Text(
-                                        "${controller.currency.currencyBuyRate}",
+                                        "₦${controller.currency.currencyBuyRate} per dollar",
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           color: Colors.grey.shade700,
                                           fontSize: 15.0,
                                           fontWeight: FontWeight.w600,
+                                            fontFamily: 'Roboto'
                                         ),
                                       ),
                                     ],
@@ -152,23 +154,25 @@ class SellCryptoBottomSheetWidget {
                                       Row(
                                         children: [
                                           Text(
-                                            "You'll receive:",
+                                            "You will receive:",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               color: Colors.grey.shade700,
                                               fontSize: 15.0,
                                               fontWeight: FontWeight.w600,
+                                              fontFamily: 'Roboto'
                                             ),
                                           ),
                                           const SizedBox(width: 10.0,),
 
                                           Text(
-                                            "${controller.newCurrencyBuyRate}",
+                                            "₦${controller.newCurrencyBuyRate}",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               color: Colors.grey.shade700,
                                               fontSize: 15.0,
                                               fontWeight: FontWeight.w600,
+                                                fontFamily: 'Roboto'
                                             ),
                                           ),
                                         ],
@@ -201,7 +205,7 @@ class SellCryptoBottomSheetWidget {
                                       ),
                                       child: (!controller.isSellCryptoLoading) ?
                                       const Text(
-                                        "Submit",
+                                        "Continue",
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 16.0,
@@ -279,7 +283,7 @@ class SellCryptoBottomSheetWidget {
 
                               Align(
                                 alignment: Alignment.center,
-                                child: QrImageView(
+                                child: QrImage(
                                   data: controller.currencyNetwork.networkAddress!,
                                   version: QrVersions.auto,
                                   size: 200.0,
@@ -345,7 +349,7 @@ class SellCryptoBottomSheetWidget {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
-                                    "Transfer Amount: ${controller.cryptoAmount}",
+                                    "Transfer Amount: \$${controller.cryptoAmount}",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       color: Colors.grey.shade600,
@@ -353,15 +357,16 @@ class SellCryptoBottomSheetWidget {
                                       fontWeight: FontWeight.w800,
                                     ),
                                   ),
-                                  Text(
-                                    "${controller.currency.currencySymbol}",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Colors.grey.shade600,
-                                      fontSize: 12.0,
-                                      fontWeight: FontWeight.w800,
-                                    ),
-                                  ),
+                                  // Text(
+                                  //   ""
+                                  //   // "${controller.currency.currencySymbol}",
+                                  //   textAlign: TextAlign.center,
+                                  //   style: TextStyle(
+                                  //     color: Colors.grey.shade600,
+                                  //     fontSize: 12.0,
+                                  //     fontWeight: FontWeight.w800,
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                               const SizedBox(height: 20.0),
@@ -384,21 +389,22 @@ class SellCryptoBottomSheetWidget {
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
-                              const SizedBox(height: 10.0),
+                              const SizedBox(height: 25.0),
 
-                              Text(
-                                "I've transferred the coin;",
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                  color: Colors.grey.shade800,
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
+                              // Text(
+                              //   "I've transferred the coin;",
+                              //   textAlign: TextAlign.start,
+                              //   style: TextStyle(
+                              //     color: Colors.grey.shade800,
+                              //     fontSize: 14.0,
+                              //     fontWeight: FontWeight.w600,
+                              //   ),
+                              // ),
 
                               //  Upload Proof Button.
                               TextButton(
                                 onPressed: () {
+                                  Get.back();
                                   UploadImageBottomSheetWidget.uploadImageBottomSheetWidget();
                                 },
                                 style: TextButton.styleFrom(
@@ -412,7 +418,7 @@ class SellCryptoBottomSheetWidget {
                                     color: const Color(0XFF07B46B),
                                   ),
                                   child: const Text(
-                                    "Upload Proof",
+                                    "I Have Transferred the Coin",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 16.0,

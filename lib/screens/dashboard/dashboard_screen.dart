@@ -79,20 +79,20 @@ class DashboardScreen extends StatelessWidget {
                   ),
                   const SizedBox(width: 10.0,),
 
-                  const Icon(
-                    Iconsax.star,
-                    color: Colors.white,
-                    size: 25,
-                  ),
+                  // const Icon(
+                  //   Iconsax.star,
+                  //   color: Colors.white,
+                  //   size: 25,
+                  // ),
 
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Iconsax.notification_bing5,
-                      color: Colors.white,
-                      size: 25,
-                    ),
-                  )
+                  // IconButton(
+                  //   onPressed: () {},
+                  //   icon: const Icon(
+                  //     Iconsax.notification_bing5,
+                  //     color: Colors.white,
+                  //     size: 25,
+                  //   ),
+                  // )
                 ],
               ),
             ),
@@ -232,9 +232,9 @@ class DashboardScreen extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(10.0),
                                     )
                                 ),
-                                icon: const Row(
+                                icon: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
+                                  children: const [
                                     Icon(
                                       Iconsax.gift,
                                       color: Colors.white,
@@ -268,9 +268,9 @@ class DashboardScreen extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(10.0),
                                     )
                                 ),
-                                icon: const Row(
+                                icon: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
+                                  children: const [
                                     Icon(
                                       Iconsax.bitcoin_refresh,
                                       color: Colors.white,
@@ -369,24 +369,24 @@ class DashboardScreen extends StatelessWidget {
                                   ],
                                 ),
 
-                                Column(
-                                  children: [
-                                    const Icon(
-                                      Iconsax.money_send,
-                                      color: Color(0XFF59C88A),
-                                    ),
-                                    const SizedBox(height: 3.0),
-
-                                    Text(
-                                      "Send",
-                                      style: TextStyle(
-                                          color: Colors.grey.shade700,
-                                          fontSize: 11.0,
-                                          fontWeight: FontWeight.w600
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                // Column(
+                                //   children: [
+                                //     const Icon(
+                                //       Iconsax.money_send,
+                                //       color: Color(0XFF59C88A),
+                                //     ),
+                                //     const SizedBox(height: 3.0),
+                                //
+                                //     Text(
+                                //       "Send",
+                                //       style: TextStyle(
+                                //           color: Colors.grey.shade700,
+                                //           fontSize: 11.0,
+                                //           fontWeight: FontWeight.w600
+                                //       ),
+                                //     ),
+                                //   ],
+                                // ),
 
                                 Column(
                                   children: [

@@ -3,8 +3,9 @@
 */
 // const String baseURL = "http://10.0.2.2:5000/api/v1"; //  Emulator
 // const String baseURL = "http://192.168.0.35:5000/api/v1"; // Development
-const String baseURL = "http://192.168.216.250:5000/api/v1"; // Development
-// const String baseURL = "https://deeventures.com/api/v1";  // Production
+const String baseURL = "http://192.168.1.168:9000/api/v1"; // Development
+const String imgBaseUrlProd = "https://deeventures.com.ng/";  // Production
+const String imgBaseUrlDev = "http://192.168.1.168/deeventures/";  // development
 
 
 /*
@@ -59,6 +60,7 @@ const String getElectricityCompaniesRoute = "/bills_payment/all_electric_compani
 const String getMeterTypesRoute = "/electricity_companies/all_meter_types";
 const String getElectricityCompaniesCommissionRoute = "/electricity_companies/single_electricity_company";
 const String buyElectricityRoute = "/bills_payment/buy_electricity";
+const String validateMeterNoRoute = "/bills_payment/validate_meter_no";
 
 const String getCableTVRoute = "/bills_payment/all_cable_tv";
 const String getCableTVCommissionRoute = "/cable_tvs/single_cable_tv";

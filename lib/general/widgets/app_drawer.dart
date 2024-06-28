@@ -15,10 +15,10 @@ class AppDrawer extends StatelessWidget {
   final List<DrawerItem> _drawerItems = [
     DrawerItem(icon: Iconsax.home, title: "Home", route: homeScreen),
     DrawerItem(icon: Iconsax.align_vertically, title: "Top Trader", route: topTradersScreen),
-    DrawerItem(icon: Iconsax.chart_1, title: "Leaderboard Info", route: leaderBoardScreen),
+    // DrawerItem(icon: Iconsax.chart_1, title: "Leaderboard Info", route: leaderBoardScreen),
     DrawerItem(icon: Iconsax.moneys, title: "Make Money", route: makeMoneyScreen),
     DrawerItem(icon: Iconsax.sms_tracking, title: "Promo Code", route: promoScreen),
-    DrawerItem(icon: Iconsax.notification, title: "Notification", route: notificationScreen),
+    // DrawerItem(icon: Iconsax.notification, title: "Notification", route: notificationScreen),
     DrawerItem(icon: Iconsax.call_calling, title: "Customer Support", route: customerSupportScreen),
     DrawerItem(icon: Iconsax.setting_2, title: "Settings", route: settingsScreen),
     DrawerItem(icon: Iconsax.logout_14, title: "Logout", route: ""),

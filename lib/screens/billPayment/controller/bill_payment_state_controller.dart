@@ -22,6 +22,7 @@ class BillPaymentStateController extends GetxController {
   String _electricCompanyCode = "";
   String _meterTypeCode = "";
   String _meterNumber = "";
+  String _meterOwnerName = "";
   double _amount = 0.0;
   double _totalPrice = 0.0;
   String _phoneNumber = "";
@@ -54,7 +55,23 @@ class BillPaymentStateController extends GetxController {
   final FlutterSecureStorage _flutterSecureStorage = const FlutterSecureStorage();
   AutovalidateMode _autoValidateMode = AutovalidateMode.disabled;
   final formatter = NumberFormat("#,##0");
+  final FocusNode meterNoFocusNode = FocusNode();
 
+  @override
+  void onInit() {
+    super.onInit();
+    meterNoFocusNode.addListener(() {
+      if (!meterNoFocusNode.hasFocus) {
+        validateMeterNumber();
+      }
+    });
+  }
+
+  @override
+  void onClose() {
+    meterNoFocusNode.dispose();
+    super.onClose();
+  }
 
   /*
   * Getters
@@ -63,6 +80,8 @@ class BillPaymentStateController extends GetxController {
   double get commissionRate => _commissionRate;
   double get commissionPrice => _commissionPrice;
   bool get isLoading => _isLoading;
+  String get meterOwnerName => _meterOwnerName;
+
   TextEditingController get amountTextEditingController => _amountTextEditingController;
   List<Airtime> get airTimes => _airTimes;
   List<InternetServiceProvider> get internetServiceProviders => _internetServiceProviders;
@@ -93,6 +112,11 @@ class BillPaymentStateController extends GetxController {
   }
   void setMeterTypeCode(String value) {
     _meterTypeCode = value;
+    update();
+  }
+
+  void setMeterOwnerName(String value) {
+    _meterOwnerName = value;
     update();
   }
   void setMeterNumber(String value) {
@@ -148,13 +172,26 @@ class BillPaymentStateController extends GetxController {
     update();
   }
   void setAmount(double value) {
-    _amount = value;
-    double totalAmount = calculateTotalPrice(value);
+    // Limit the input to two decimal places
+    String formattedValue = value.toStringAsFixed(2);
+
+    // Parse the formatted value back to double
+    _amount = double.parse(formattedValue);
+
+    double totalAmount = calculateTotalPrice(_amount);
     _totalPrice = totalAmount;
-    _amountTextEditingController.text = totalAmount.toString();
+
+    // Update the text editing controller with the formatted value
+    _amountTextEditingController.text = formattedValue;
+
+    // Find the position of the decimal point
+    int decimalPosition = formattedValue.indexOf('.');
+
+    // Move the cursor to just before the decimal point
     _amountTextEditingController.selection = TextSelection.fromPosition(
-      TextPosition(offset: _amountTextEditingController.text.length),
+      TextPosition(offset: decimalPosition),
     );
+
     update();
   }
   void clearTotalPrice() {
@@ -187,7 +224,8 @@ class BillPaymentStateController extends GetxController {
     update();
   }
   double calculateTotalPrice(double value) {
-    double commissionPrice = (_commissionRate / 100) * value;
+    double commissionPrice = _commissionRate;
+    // double commissionPrice = (_commissionRate / 100) * value;
     double totalAmount = value + commissionPrice;
     setCommissionPrice(commissionPrice);
     return totalAmount;
@@ -275,6 +313,37 @@ class BillPaymentStateController extends GetxController {
       _appToastWidget.notification("Oooops!", errorMessage, "Error");
     }
   }
+
+  // Internet
+  Future<void> validateMeterNumber() async {
+    setIsLoading(true);
+
+    String? token = await _flutterSecureStorage.read(key: "token");
+    String decodedToken = jsonDecode(token!);
+
+    Map<String, dynamic> validateMeterNoBody = {
+      "electric_company_code": _electricCompanyCode,
+      "meter_no": _meterNumber
+    };
+
+    var response = await BillPaymentAPI.validateMeterNo(validateMeterNoRoute, validateMeterNoBody, decodedToken);
+    bool isSuccess = response!.data["success"];
+    debugPrint("RESPONSE ::: $isSuccess");
+
+    if (isSuccess) {
+      setIsLoading(false);
+
+      String meterOwner = response.data["data"]["validatedData"]["customer_name"];
+      setMeterOwnerName(meterOwner);
+      debugPrint("meterOwner::: $meterOwner");
+    } else {
+      setIsLoading(false);
+      String errorMessage = response.data["message"];
+      _appToastWidget.notification("Oooops!", errorMessage, "Error");
+    }
+  }
+
+
   Future<void> getInternetServiceProvidersCommission(String code) async {
 
     String? token = await _flutterSecureStorage.read(key: "token");
@@ -305,7 +374,8 @@ class BillPaymentStateController extends GetxController {
       "mobileNetwork": _internetServiceProvider,
       "dataPlan": _internetServiceProviderPackage,
       "mobileNumber": _phoneNumber,
-      "dataBundleAmount": _totalPrice
+      "dataBundleAmount": _amountTextEditingController.text,
+      "totalAmt": _totalPrice
     };
 
     debugPrint("INTERNET::: $buyInternetData");
@@ -398,7 +468,7 @@ class BillPaymentStateController extends GetxController {
     }
   }
   Future<void> buyElectricity() async {
-    // setIsLoading(true);
+    setIsLoading(true);
 
     String? token = await _flutterSecureStorage.read(key: "token");
     String decodedToken = jsonDecode(token!);
@@ -407,17 +477,19 @@ class BillPaymentStateController extends GetxController {
       "electricCompanyCode": _electricCompanyCode,
       "meterType": _meterTypeCode,
       "meterNumber": _meterNumber,
-      "amount": _totalPrice,
+      "amount": _amountTextEditingController.text,
+      "totalAmt": _totalPrice,
       "mobileNumber": _phoneNumber,
     };
 
-    // debugPrint("ELECTRIC COMPANIES::: $buyElectricityData");
+    debugPrint("ELECTRIC buyElectricityData::: $buyElectricityData");
     var response = await BillPaymentAPI.buyElectricityService(buyElectricityRoute, buyElectricityData, decodedToken);
     bool isSuccess = response!.data["success"];
-    // debugPrint("ELECTRIC COMPANIES::: $response");
+    debugPrint("ELECTRIC buyElectricityData::: $response");
 
     if (isSuccess) {
       setIsLoading(false);
+      setMeterOwnerName("");
     } else {
       setIsLoading(false);
       String errorMessage = response.data["message"];

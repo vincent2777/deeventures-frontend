@@ -84,7 +84,7 @@ class UserWallet {
   factory UserWallet.fromJson(Map<String, dynamic> json) => UserWallet(
     id: json["id"],
     userId: json["user_id"],
-    amount: json["amount"],
+    amount: double.parse(json["amount"].toString()),
     currencySymbol: json['currency_symbol'],
   );
 

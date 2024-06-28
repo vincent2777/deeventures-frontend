@@ -1,6 +1,6 @@
 {
-    "name": "dee_ventures_mobile",
-    "short_name": "dee_ventures_mobile",
+    "name": "deeventures",
+    "short_name": "deeventures",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

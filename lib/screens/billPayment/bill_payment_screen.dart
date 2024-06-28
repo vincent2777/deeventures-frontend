@@ -45,7 +45,7 @@ class BillPaymentScreen extends StatelessWidget {
                 child: Container(
                   height: Get.height,
                   width: Get.width,
-                  color: Colors.grey.shade100,
+                  color: Colors.white,
                   padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 20.0),
                   child: GridView.builder(
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -66,7 +66,7 @@ class BillPaymentScreen extends StatelessWidget {
                           ) : (controller.billCategories[index].name == "Electricity") ? (
                               controller.getElectricCompanies()
                           ) : (controller.billCategories[index].name == "Cable TV") ? (
-                              controller.getCableTVs(),
+                              controller.getCableTVs()
                           ) : (
                               controller.getBettingCompanies()
                           );

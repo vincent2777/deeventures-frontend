@@ -74,6 +74,31 @@ class BillPaymentAPI {
       throw Exception(e.response);
     }
   }
+
+  //  validate meter no.
+  static Future<Response?> validateMeterNo(String url, Map<String, dynamic> body, String token) async {
+    String fullURL = "$baseURL$url";
+    debugPrint("URL::: $fullURL body::: $body");
+
+    try {
+      return await Dio().get(
+        fullURL,
+        queryParameters: body,
+        options: Options(headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        }),
+      );
+    } on DioException catch (e) {
+      if (e.response != null) {
+        return e.response;
+      }
+      debugPrint("ERROR RESPONSE::: $e");
+      throw Exception(e.response);
+    }
+  }
+
   static Future<Response?> getInternetServiceProvidersCommissionService(String url, code, String token) async {
     String fullURL = "$baseURL$url/$code";
     debugPrint("URL::: $fullURL");

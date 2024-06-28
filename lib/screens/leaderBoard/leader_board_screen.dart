@@ -42,38 +42,39 @@ class LeaderBoardScreen extends StatelessWidget {
             width: Get.width,
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 25.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(15.0),
                   child: Image.asset(
-                    "assets/images/leader_board.png",
+                    "assets/images/leaderboard.png",
                     height: 265.0,
                     width: Get.width,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.contain,
                   ),
                 ),
-                const SizedBox(height: 20.0),
+                const SizedBox(height: 50.0),
 
-                const Text(
-                  "Get Extra Cash On Your Trade",
+                 Text(
+                  "No current coupons",
+                  textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Color(0XFF09A060),
+                    color: Colors.grey.shade600,
                     fontSize: 18.0,
                     fontWeight: FontWeight.w600
                   ),
                 ),
                 const SizedBox(height: 5.0),
 
-                Text(
-                  "To celebrate INDEPENDENCE, Deeventures is giving extra 1,000 naira on Giftcard transaction above 25,000 or 353 cedis.\nOver valid from now till Wednesday 5th of October 2022.\nUSE PROMO CODE: 9JA@62",
-                  maxLines: 6,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: Colors.grey.shade700,
-                    fontWeight: FontWeight.w500
-                  ),
-                ),
+                // Text(
+                //   "To celebrate INDEPENDENCE, Deeventures is giving extra 1,000 naira on Giftcard transaction above 25,000 or 353 cedis.\nOver valid from now till Wednesday 5th of October 2022.\nUSE PROMO CODE: 9JA@62",
+                //   maxLines: 6,
+                //   overflow: TextOverflow.ellipsis,
+                //   style: TextStyle(
+                //     color: Colors.grey.shade700,
+                //     fontWeight: FontWeight.w500
+                //   ),
+                // ),
               ],
             ),
           );

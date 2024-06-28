@@ -14,12 +14,13 @@ class AppBottomNavigationBar  extends StatelessWidget{
       color: Colors.white,
       clipBehavior: Clip.hardEdge,
       elevation: 5.0,
-      height: 70.0,
+      // height: 70.0,
       notchMargin: 7.0,
       shape: const CircularNotchedRectangle(),
-      shadowColor: Colors.grey.shade500,
-      padding: EdgeInsets.zero,
+      // shadowColor: Colors.grey.shade500,
+      // padding: EdgeInsets.zero,
       child: Container(
+        height: 70,
         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
         decoration: const BoxDecoration(
           boxShadow: [
@@ -34,12 +35,12 @@ class AppBottomNavigationBar  extends StatelessWidget{
           color: Colors.white,
         ),
         child: Row(
-          mainAxisSize: MainAxisSize.max,
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             _buildBottomAppBarItem(homeStateController, Iconsax.home, "Home", 0),
             _buildBottomAppBarItem(homeStateController, Iconsax.bitcoin_convert, "Transactions", 1),
-            _buildBottomAppBarItem(homeStateController, Iconsax.diagram, "Rate Calculator", 2),
+            _buildBottomAppBarItem(homeStateController, Iconsax.gift, "Gift Card", 2),
             _buildBottomAppBarItem(homeStateController, Iconsax.wallet_1, "Wallet", 3),
           ],
         ),

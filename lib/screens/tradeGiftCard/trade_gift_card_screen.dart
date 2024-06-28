@@ -175,7 +175,7 @@ class TradeGiftCardScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10.0)
                           ),
                           child: const Center(
-                            child: Text("You don't have any gft card yet."),
+                            child: Text("You don't have any gift card yet."),
                           ),
                         )
                     )
