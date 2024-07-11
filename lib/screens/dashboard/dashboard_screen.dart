@@ -1,11 +1,14 @@
 import 'package:deeventures/general/controllers/general_state_controller.dart';
 import 'package:deeventures/screens/wallet/controllers/wallet_state_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 
 import '../../routes/app_routes/app_route_names.dart';
+import '../wallet/widgets/deposit_money_bottom_sheet_widget.dart';
+import '../wallet/widgets/withdraw_money_bottom_sheet_widget.dart';
 import 'controllers/dashboard_state_controller.dart';
 
 
@@ -17,6 +20,14 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    // Set status bar color to green with light white text
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor:  Color(0XFF0E6C44),
+      statusBarIconBrightness: Brightness.light, // For Android
+      statusBarBrightness: Brightness.light, // For iOS
+    ));
+
 
     return GetBuilder<DashboardStateController>(builder: (controller) {
       return Container(
@@ -60,7 +71,9 @@ class DashboardScreen extends StatelessWidget {
                     height: 30.0,
                     width: 90.0,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.toNamed("/topTradersScreen");
+                      },
                       style: TextButton.styleFrom(
                           backgroundColor: Colors.white,
                           padding: EdgeInsets.zero,
@@ -350,23 +363,28 @@ class DashboardScreen extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Column(
-                                  children: [
-                                    const Icon(
-                                      Iconsax.moneys,
-                                      color: Color(0XFF59C88A),
-                                    ),
-                                    const SizedBox(height: 3.0),
-
-                                    Text(
-                                      "Withdraw",
-                                      style: TextStyle(
-                                          color: Colors.grey.shade700,
-                                          fontSize: 11.0,
-                                          fontWeight: FontWeight.w600
+                                GestureDetector(
+                                  onTap: (){
+                                    WithdrawMoneyBottomSheetWidget.withdrawMoneyBottomSheetWidget();
+                                  },
+                                  child: Column(
+                                    children: [
+                                      const Icon(
+                                        Iconsax.moneys,
+                                        color: Color(0XFF59C88A),
                                       ),
-                                    ),
-                                  ],
+                                      const SizedBox(height: 3.0),
+
+                                      Text(
+                                        "Withdraw",
+                                        style: TextStyle(
+                                            color: Colors.grey.shade700,
+                                            fontSize: 11.0,
+                                            fontWeight: FontWeight.w600
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
 
                                 // Column(
@@ -388,7 +406,11 @@ class DashboardScreen extends StatelessWidget {
                                 //   ],
                                 // ),
 
-                                Column(
+                                GestureDetector(
+                                    onTap: (){
+                                      DepositMoneyBottomSheetWidget.depositMoneyBottomSheetWidget();
+                                    },
+                                    child:Column(
                                   children: [
                                     const Icon(
                                       Iconsax.money_recive,
@@ -405,7 +427,7 @@ class DashboardScreen extends StatelessWidget {
                                       ),
                                     ),
                                   ],
-                                ),
+                                )),
                               ],
                             ),
                           ),

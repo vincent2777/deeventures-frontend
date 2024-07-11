@@ -5,6 +5,7 @@ import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../utils/colors.dart';
 import '../controller/bill_payment_state_controller.dart';
 
 
@@ -353,7 +354,7 @@ class InternetWidget extends StatelessWidget {
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(7.0),
-                    color: const Color(0XFF07B46B),
+                    color: mainGreen,
                   ),
                   child: (!controller.isLoading) ? (
                    Text(

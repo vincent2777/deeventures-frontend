@@ -54,4 +54,78 @@ class AuthAPI {
     }
   }
 
+
+  //  Update User Password.
+  static Future<Response?> updatePasswordService(String url, Map<String, dynamic> passwordData, String token, int userID) async {
+    var fullURL = "$baseURL$url/$userID";
+    debugPrint("URL::: $fullURL \n $passwordData");
+
+    try {
+      return await Dio().post(
+        fullURL,
+        data: passwordData,
+        options: Options(headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        }),
+      );
+    } on DioException catch (error) {
+      if (error.response != null) {
+        return error.response;
+      }
+      debugPrint("ERROR RESPONSE::: $error");
+      throw Exception(error.response);
+    }
+  }
+
+
+  //  Delete User Password.
+  static Future<Response?> deleteUserService(String url, String token, int userID) async {
+    var fullURL = "$baseURL$url/$userID";
+    debugPrint("URL::: $fullURL \n ");
+
+    try {
+      return await Dio().delete(
+        fullURL,
+        options: Options(headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        }),
+      );
+    } on DioException catch (error) {
+      if (error.response != null) {
+        return error.response;
+      }
+      debugPrint("ERROR RESPONSE::: $error");
+      throw Exception(error.response);
+    }
+  }
+
+
+  //  Update User .
+  static Future<Response?> updateUserService(String url, Map<String, dynamic> userData, String token, int userID) async {
+    var fullURL = "$baseURL$url/$userID";
+    debugPrint("URL::: $fullURL \n $userData");
+
+    try {
+      return await Dio().put(
+        fullURL,
+        data: userData,
+        options: Options(headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        }),
+      );
+    } on DioException catch (error) {
+      if (error.response != null) {
+        return error.response;
+      }
+      debugPrint("ERROR RESPONSE::: $error");
+      throw Exception(error.response);
+    }
+  }
+
 }

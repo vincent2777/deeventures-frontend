@@ -58,6 +58,7 @@ class BillDetailsBottomSheetWidget {
                     Expanded(
                       flex: 20,
                       child: SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(),
                         child: Column(
                           children: [
 

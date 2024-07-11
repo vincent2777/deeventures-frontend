@@ -4,6 +4,7 @@ import 'package:form_validator/form_validator.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../routes/app_routes/app_route_names.dart';
+import '../../utils/colors.dart';
 import 'controllers/login_state_controller.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -275,7 +276,7 @@ class LoginScreen extends StatelessWidget {
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(7.0),
-                                  color: const Color(0XFF07B46B),
+                                  color: mainGreen,
                                 ),
                                 child: (!controller.isLoading) ?
                                 const Text(

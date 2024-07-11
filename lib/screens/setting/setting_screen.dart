@@ -1,7 +1,9 @@
+import 'package:deeventures/screens/setting/settings_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../routes/app_routes/app_route_names.dart';
 import 'controllers/setting_state_controller.dart';
 
 class SettingScreen extends StatelessWidget {
@@ -14,20 +16,14 @@ class SettingScreen extends StatelessWidget {
     return GetBuilder<SettingStateController>(builder: (controller) {
       return SafeArea(
         child: Scaffold(
-
+      backgroundColor: Colors.white,
           appBar: AppBar(
             leading: IconButton(
               onPressed: () {
                 Get.back();
               },
-              icon: Image.asset(
-                "assets/images/arrow_back.png",
-                height: 17.0,
-                width: 30.0,
-                color: Colors.grey.shade700,
-              ),
+              icon: const Icon(Icons.chevron_left_outlined),
             ),
-
             title: Text(
               "Settings",
               style: TextStyle(
@@ -42,6 +38,7 @@ class SettingScreen extends StatelessWidget {
           body: Container(
             height: Get.height,
             width: Get.width,
+            color: Colors.white,
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
             child: SingleChildScrollView(
               child: Column(
@@ -49,10 +46,10 @@ class SettingScreen extends StatelessWidget {
                   const SizedBox(height: 20.0),
 
                   _profile(),
-                  const SizedBox(height: 10.0),
+                  const SizedBox(height: 20.0),
 
                   _security(),
-                  const SizedBox(height: 10.0),
+                  const SizedBox(height: 20.0),
 
                   _information(),
                 ],
@@ -69,7 +66,10 @@ class SettingScreen extends StatelessWidget {
       children: [
         Container(
           width: Get.width,
-          color: Colors.green,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4),
+            color: const Color(0XFF09A060),
+          ),
           padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
           child: const Text(
               "Profile",
@@ -84,7 +84,9 @@ class SettingScreen extends StatelessWidget {
           shrinkWrap: true,
           children: [
             ListTile(
-              onTap: () {},
+              onTap: () {
+                SettingsBottomSheetWidget.editProfile();
+              },
               dense: true,
               leading: const Icon(Iconsax.user_edit),
               title: const Text(
@@ -94,17 +96,17 @@ class SettingScreen extends StatelessWidget {
                 ),
               ),
             ),
-            ListTile(
-              onTap: () {},
-              dense: true,
-              leading: const Icon(Iconsax.bank),
-              title: const Text(
-                "Bank Account",
-                style: TextStyle(
-                    fontSize: 14.0
-                ),
-              ),
-            ),
+            // ListTile(
+            //   onTap: () {},
+            //   dense: true,
+            //   leading: const Icon(Iconsax.bank),
+            //   title: const Text(
+            //     "Bank Account",
+            //     style: TextStyle(
+            //         fontSize: 14.0
+            //     ),
+            //   ),
+            // ),
           ],
         )
       ],
@@ -116,7 +118,10 @@ class SettingScreen extends StatelessWidget {
       children: [
         Container(
           width: Get.width,
-          color: Colors.green,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4),
+            color: const Color(0XFF09A060),
+          ),
           padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
           child: const Text(
               "Security",
@@ -131,7 +136,9 @@ class SettingScreen extends StatelessWidget {
           shrinkWrap: true,
           children: [
             ListTile(
-              onTap: () {},
+              onTap: () {
+                SettingsBottomSheetWidget.changePassword();
+              },
               dense: true,
               leading: const Icon(Iconsax.password_check),
               title: const Text(
@@ -141,25 +148,29 @@ class SettingScreen extends StatelessWidget {
                 ),
               ),
             ),
+            // ListTile(
+            //   onTap: () {
+            //
+            //   },
+            //   dense: true,
+            //   leading: Text(
+            //     "2FA",
+            //     style: TextStyle(
+            //       color: Colors.grey.shade800,
+            //       fontSize: 14.0,
+            //     ),
+            //   ),
+            //   title: const Text(
+            //     "2 Factor Authentication",
+            //     style: TextStyle(
+            //         fontSize: 14.0
+            //     ),
+            //   ),
+            // ),
             ListTile(
-              onTap: () {},
-              dense: true,
-              leading: Text(
-                "2FA",
-                style: TextStyle(
-                  color: Colors.grey.shade800,
-                  fontSize: 14.0,
-                ),
-              ),
-              title: const Text(
-                "2 Factor Authentication",
-                style: TextStyle(
-                    fontSize: 14.0
-                ),
-              ),
-            ),
-            ListTile(
-              onTap: () {},
+              onTap: () {
+                SettingsBottomSheetWidget.deleteAccount();
+              },
               dense: true,
               leading: const Icon(Iconsax.profile_delete,),
               title: const Text(
@@ -180,7 +191,10 @@ class SettingScreen extends StatelessWidget {
       children: [
         Container(
           width: Get.width,
-          color: Colors.green,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4),
+            color: const Color(0XFF09A060),
+          ),
           padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
           child: const Text(
               "Information",
@@ -195,7 +209,9 @@ class SettingScreen extends StatelessWidget {
           shrinkWrap: true,
           children: [
             ListTile(
-              onTap: () {},
+              onTap: () {
+                SettingsBottomSheetWidget.aboutDeeventures();
+              },
               dense: true,
               leading: Image.asset(
                 "assets/images/launcher_icon.png",
@@ -211,7 +227,11 @@ class SettingScreen extends StatelessWidget {
               ),
             ),
             ListTile(
-              onTap: () {},
+              onTap: () {
+                Get.toNamed(
+                  '$webViewScreen?pageLink=https://deeventures.com.ng/terms.html&pageTitle=Terms and Conditions',
+                );
+              },
               dense: true,
               leading: Text(
                 "T&C",
@@ -228,26 +248,13 @@ class SettingScreen extends StatelessWidget {
                 ),
               ),
             ),
+
             ListTile(
-              onTap: () {},
-              dense: true,
-              leading: Text(
-                "Ref",
-                style: TextStyle(
-                    color: Colors.grey.shade800,
-                    fontSize: 13.5,
-                    fontWeight: FontWeight.w800
-                ),
-              ),
-              title: const Text(
-                "About Referral",
-                style: TextStyle(
-                    fontSize: 14.0
-                ),
-              ),
-            ),
-            ListTile(
-              onTap: () {},
+              onTap: () {
+                Get.toNamed(
+                  '$webViewScreen?pageLink=https://deeventures.com.ng/faqs.html&pageTitle=Frequently Asked Questions',
+                );
+              },
               dense: true,
               leading: const Icon(Iconsax.tag),
               title: const Text(

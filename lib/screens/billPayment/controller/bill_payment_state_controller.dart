@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:deeventures/screens/billPayment/models/cableTV_model.dart';
 import 'package:deeventures/screens/billPayment/models/electric_company_model.dart';
 import 'package:deeventures/screens/billPayment/models/meterType_model.dart';
+import 'package:deeventures/screens/wallet/controllers/wallet_state_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
@@ -55,6 +56,7 @@ class BillPaymentStateController extends GetxController {
   AutovalidateMode _autoValidateMode = AutovalidateMode.disabled;
   final formatter = NumberFormat("#,##0");
   final FocusNode meterNoFocusNode = FocusNode();
+  final WalletStateController walletStateController = Get.put(WalletStateController());
 
   @override
   void onInit() {
@@ -275,7 +277,9 @@ class BillPaymentStateController extends GetxController {
 
     if (isSuccess) {
       setIsLoading(false);
-      Get.back();
+      walletStateController.getUserWallet();
+      Get.toNamed("/homeScreen");
+
       _appToastWidget.notification("Success", successMessage, "Success");
     } else {
       setIsLoading(false);
@@ -332,9 +336,11 @@ class BillPaymentStateController extends GetxController {
     if (isSuccess) {
       setIsLoading(false);
 
-      String meterOwner = response.data["data"]["validatedData"]["customer_name"];
-      setMeterOwnerName(meterOwner);
-      debugPrint("meterOwner::: $meterOwner");
+      if(response.data["data"]["validatedData"] != null){
+        String meterOwner = response.data["data"]["validatedData"]["customer_name"];
+        setMeterOwnerName(meterOwner);
+        debugPrint("meterOwner::: $meterOwner");
+      }
     } else {
       setIsLoading(false);
       String errorMessage = response.data["message"];
@@ -385,7 +391,8 @@ class BillPaymentStateController extends GetxController {
 
     if (isSuccess) {
       setIsLoading(false);
-      Get.back();
+      walletStateController.getUserWallet();
+      Get.toNamed("/homeScreen");
       _appToastWidget.notification("Success", successMessage, "Success");
 
     } else {
@@ -414,6 +421,7 @@ class BillPaymentStateController extends GetxController {
       getMeterType();
 
       // debugPrint("ELECTRIC COMPANIES::: ${response.data["data"]}");
+
       List<dynamic> electricCompanyData = response.data["data"]["electricCompanies"] ?? [];
       List<ElectricCompany> electricCompanies = electricCompanyData.map((eachElectricCompany) => ElectricCompany.fromJson(eachElectricCompany)).toList();
       setElectricCompanies(electricCompanies);
@@ -489,6 +497,8 @@ class BillPaymentStateController extends GetxController {
     if (isSuccess) {
       setIsLoading(false);
       setMeterOwnerName("");
+      walletStateController.getUserWallet();
+      Get.toNamed("/homeScreen");
     } else {
       setIsLoading(false);
       String errorMessage = response.data["message"];
@@ -564,7 +574,8 @@ class BillPaymentStateController extends GetxController {
 
     if (isSuccess) {
       setIsLoading(false);
-
+      walletStateController.getUserWallet();
+      Get.toNamed("/homeScreen");
     } else {
       setIsLoading(false);
       String errorMessage = response.data["message"];

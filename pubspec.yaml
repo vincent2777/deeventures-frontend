@@ -48,6 +48,8 @@ dependencies:
   intl:
   image_picker:
   flutter_spinkit:
+  url_launcher:
+  webview_flutter:
 
 dev_dependencies:
   flutter_test:

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../../../utils/colors.dart';
 import '../../transactions/widgets/upload_image_bottom_sheet_widget.dart';
 import '../controllers/wallet_state_controller.dart';
 
@@ -149,7 +151,7 @@ class DepositMoneyBottomSheetWidget {
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(7.0),
-                                              color: const Color(0XFF07B46B),
+                                              color: mainGreen,
                                             ),
                                             child: (!controller.isLoading) ?
                                             const Text(
@@ -160,13 +162,9 @@ class DepositMoneyBottomSheetWidget {
                                                   fontWeight: FontWeight.w600
                                               ),
                                             ) :
-                                            const SizedBox(
-                                              height: 20.0,
-                                              width: 20.0,
-                                              child: CircularProgressIndicator(
-                                                color: Colors.white,
-                                                strokeWidth: 2.0,
-                                              ),
+                                            const SpinKitCircle(
+                                              color: Colors.white,
+                                              size: 40,
                                             ),
                                           ),
                                         ),
@@ -487,7 +485,7 @@ class DepositMoneyBottomSheetWidget {
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(7.0),
-                                color: const Color(0XFF07B46B),
+                                color: mainGreen,
                               ),
                               child: const Text(
                                 "Upload Proof",

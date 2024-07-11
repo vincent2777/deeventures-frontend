@@ -18,6 +18,7 @@ class WalletStateController extends GetxController {
   String _accountNumber = "";
   String _accountName = "";
   String _bankName = "";
+  String _withdrawalChannel = "main_wallet";
   Wallet _wallet = Wallet(currencySymbol: "", amount: 0.0);
   Wallet _referralWallet = Wallet(currencySymbol: "", amount: 0.0);
   bool _showWalletBalance = true;
@@ -41,6 +42,7 @@ class WalletStateController extends GetxController {
   String get accountName => _accountName;
   String get bankName => _bankName;
   Wallet get wallet => _wallet;
+  String get withdrawalChannel => _withdrawalChannel;
   Wallet get referralWallet => _referralWallet;
   bool get showWalletBalance => _showWalletBalance;
   bool get showReferralWalletBalance => _showReferralWalletBalance;
@@ -61,6 +63,10 @@ class WalletStateController extends GetxController {
   }
   void setAccountNumber(String value) {
     _accountNumber = value;
+    update();
+  }
+  void setWithdrawalChannel(String value) {
+    _withdrawalChannel = value;
     update();
   }
   void setAccountName(String value) {
@@ -126,7 +132,7 @@ class WalletStateController extends GetxController {
     String decodedToken = jsonDecode(token!);
     int userID = decodedLoggedInUser["id"];
 
-    print("decodedLoggedInUser $userID");
+    print("decodedLoggedInUser $decodedLoggedInUser");
 
     var response = await WalletAPI.getUserWalletService(getUserWalletRoute, userID, decodedToken);
     bool isSuccess = response!.data["success"];
@@ -186,6 +192,8 @@ class WalletStateController extends GetxController {
     String userData = await _flutterSecureStorage.read(key: "userData") ?? "";
     Map<String, dynamic> decodedLoggedInUser = jsonDecode(userData);
 
+    print("oboyyyyy");
+
     String? token = await _flutterSecureStorage.read(key: "token");
     String decodedToken = jsonDecode(token!);
     int userID = decodedLoggedInUser["id"];
@@ -197,7 +205,7 @@ class WalletStateController extends GetxController {
     var response = await WalletAPI.depositMoneyService(depositMoneyRoute, userID, depositData, decodedToken);
     bool isSuccess = response!.data["success"];
     String message = response.data["message"];
-    // debugPrint("USER DATA:::: ${response.data["data"]}");
+    debugPrint("USER DATA:::: ${response.data["data"]}");
 
     if (isSuccess) {
       setIsLoading(false);
@@ -221,4 +229,51 @@ class WalletStateController extends GetxController {
       _appToastWidget.notification("Oooops!", errorMessage, "Error");
     }
   }
+
+  Future<void> withdrawMoney() async {
+    String userData = await _flutterSecureStorage.read(key: "userData") ?? "";
+    Map<String, dynamic> decodedLoggedInUser = jsonDecode(userData);
+
+    String? token = await _flutterSecureStorage.read(key: "token");
+    String decodedToken = jsonDecode(token!);
+    int userID = decodedLoggedInUser["id"];
+
+    Map<String, dynamic> withdrawData = {
+      "amount": _amount,
+      "user_id":userID,
+      "wchannel": withdrawalChannel,
+      "account_number": accountNumber,
+      "account_name": accountName,
+      "bank_name": bankName,
+    };
+
+    var response = await WalletAPI.withdrawMoneyService(withdrawMoneyRoute, userID, withdrawData, decodedToken);
+    bool isSuccess = response!.data["success"];
+    String message = response.data["message"];
+    debugPrint("USER DATA:::: ${response.data["data"]}");
+
+    if (isSuccess) {
+      setIsLoading(false);
+
+      if (response.data["data"] == null) {
+        _appToastWidget.notification("Note!", message, "Warning");
+      }
+
+      Map<String, dynamic> responseData = response.data["data"];
+      Map<String, dynamic> transactionData = responseData["transaction"];
+      _transactionsStateController.setTransaction(transactionFromJson(transactionData));
+
+      Get.back();
+      Get.toNamed("/homeScreen");
+
+      _appToastWidget.notification("Success!", message, "Success");
+
+      // debugPrint("transactionData DATA:::: $transactionData");
+    } else {
+      setIsLoading(false);
+      String errorMessage = response.data["message"];
+      _appToastWidget.notification("Oooops!", errorMessage, "Error");
+    }
+  }
+
 }

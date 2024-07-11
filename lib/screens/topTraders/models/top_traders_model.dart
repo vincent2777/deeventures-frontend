@@ -21,7 +21,7 @@ class TopTraders {
 
   factory TopTraders.fromJson(Map<String, dynamic> json) => TopTraders(
     totalAmount: json["total_amount"]?.toDouble(),
-    transactionCount: json["transaction_count"],
+    transactionCount: json["transaction_count"].toString(),
     user: json["user"] == null ? null : User.fromJson(json["user"]),
   );
 

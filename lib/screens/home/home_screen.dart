@@ -31,13 +31,9 @@ class HomeScreen extends StatelessWidget {
         return Scaffold(
           extendBody: true,
           extendBodyBehindAppBar: true,
-
           body: screens[controller.selectedBottomBarIndex],
-
           drawer: AppDrawer(),
-
           bottomNavigationBar: AppBottomNavigationBar(controller),
-
           floatingActionButton: FloatingActionButton(
             onPressed: () {},
             backgroundColor: Colors.green,

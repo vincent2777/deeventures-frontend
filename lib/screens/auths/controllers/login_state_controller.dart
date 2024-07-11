@@ -115,11 +115,11 @@ class LoginStateController extends GetxController {
 
     if (isUserSaved) {
       await _flutterSecureStorage.delete(key: "userData");
-      Get.toNamed(loginScreen);
+      Get.offAllNamed("/loginScreen");
     }
     if (isTokenSaved) {
       await _flutterSecureStorage.delete(key: "token");
-      Get.toNamed(loginScreen);
+      Get.offAllNamed("/loginScreen");
     }
   }
 }

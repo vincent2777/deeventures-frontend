@@ -167,6 +167,7 @@ class WalletScreen extends StatelessWidget {
                                           padding: const EdgeInsets.all(1.0),
                                           child: IconButton(
                                             onPressed: () {
+                                              controller.setWithdrawalChannel("main_wallet");
                                               WithdrawMoneyBottomSheetWidget.withdrawMoneyBottomSheetWidget();
                                             },
                                             color: const Color(0XFF59C88A),
@@ -340,7 +341,10 @@ class WalletScreen extends StatelessWidget {
                                           width: 50.0,
                                           padding: const EdgeInsets.all(1.0),
                                           child: IconButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              controller.setWithdrawalChannel("referral_wallet");
+                                              WithdrawMoneyBottomSheetWidget.withdrawMoneyBottomSheetWidget();
+                                            },
                                             color: const Color(0XFF5149F7),
                                             padding: EdgeInsets.zero,
                                             icon: const Icon(

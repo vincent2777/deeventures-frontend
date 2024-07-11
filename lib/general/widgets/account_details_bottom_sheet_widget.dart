@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../../utils/colors.dart';
 import '../controllers/general_state_controller.dart';
 
 
@@ -314,7 +315,7 @@ class AccountDetailsBottomSheetWidget {
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(7.0),
-                                  color: const Color(0XFF07B46B),
+                                  color: mainGreen,
                                 ),
                                 child: const Text(
                                   "Upload Proof",

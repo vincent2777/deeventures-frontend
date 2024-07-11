@@ -6,6 +6,7 @@ import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../utils/colors.dart';
 import '../controller/bill_payment_state_controller.dart';
 
 class ElectricityWidget extends StatelessWidget {
@@ -26,94 +27,102 @@ class ElectricityWidget extends StatelessWidget {
           ),
           const SizedBox(height: 5.0),
           DropdownButtonFormField<ElectricCompany>(
-            onChanged: (value) {
-              if (value != null) {
-                controller.setElectricCompanyCode(value.code!);
-                controller.getElectricCompaniesCommission(value.code!);
-              }
-            },
-            focusNode: FocusNode(),
-            icon: const Icon(Iconsax.arrow_down_1),
-            items: controller.electricCompanies
-                .map((ElectricCompany electricCompany) {
-              return DropdownMenuItem<ElectricCompany>(
-                value: electricCompany,
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.green.shade100,
-                      radius: 16.0,
-                      child: Container(
-                        height: 27.0,
-                        width: 27.0,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(11.0),
-                        ),
-                        child: Center(
-                          child: Text(
-                            electricCompany.name!.substring(0, 2).toUpperCase(),
-                            style: const TextStyle(
-                              fontSize: 12.0,
+            value: controller.electricCompanies.isNotEmpty
+                ? controller.electricCompanies.firstWhere(
+                  (company) => company.code == '01' && company.name == 'Eko Electric - EKEDC',
+              orElse: () => controller.electricCompanies[0],
+            )
+                : null,
+              onChanged: (value) {
+                if (value != null) {
+                  controller.setElectricCompanyCode(value.code!);
+                  controller.getElectricCompaniesCommission(value.code!);
+                }
+              },
+              focusNode: FocusNode(),
+              icon: const Icon(Iconsax.arrow_down_1),
+              items: controller.electricCompanies
+                  .map((ElectricCompany electricCompany) {
+                return DropdownMenuItem<ElectricCompany>(
+                  value: electricCompany,
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: Colors.grey.shade100,
+                        radius: 16.0,
+                        child: Container(
+                          height: 25.0,
+                          width: 25.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(11.0),
+                          ),
+                          child: Center(
+                            child: Text(
+                              electricCompany.name!.substring(0, 2).toUpperCase(),
+                              style:  TextStyle(
+                                fontSize: 12.0,
+                                color: Colors.black.withOpacity(0.8)
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(width: 20.0),
-                    Text(
-                      electricCompany.name!,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
+                      const SizedBox(width: 5.0),
+                      Text(
+                        electricCompany.name!,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+                );
+              }).toList(),
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: BorderSide(
+                    color: Colors.grey.shade300,
+                    width: 1,
+                  ),
                 ),
-              );
-            }).toList(),
-            decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.0),
-                borderSide: BorderSide(
-                  color: Colors.grey.shade300,
-                  width: 1,
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: const BorderSide(
+                    color: Color(0xFFFF9191),
+                    width: 1,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: const BorderSide(
+                    color: Color(0XFF07B46B),
+                    width: 2.0,
+                  ),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                  borderSide: const BorderSide(
+                    color: Color(0xFFFF9191),
+                    width: 2.0,
+                  ),
+                ),
+                contentPadding:
+                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 0.0),
+                filled: true,
+                fillColor: Colors.white,
+                hintText: "Choose Service Provider",
+                hintStyle: TextStyle(
+                  color: Colors.grey.shade400,
+                  fontSize: 15.0,
                 ),
               ),
-              errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.0),
-                borderSide: const BorderSide(
-                  color: Color(0xFFFF9191),
-                  width: 1,
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.0),
-                borderSide: const BorderSide(
-                  color: Color(0XFF07B46B),
-                  width: 2.0,
-                ),
-              ),
-              focusedErrorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5.0),
-                borderSide: const BorderSide(
-                  color: Color(0xFFFF9191),
-                  width: 2.0,
-                ),
-              ),
-              contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 0.0),
-              filled: true,
-              fillColor: Colors.white,
-              hintText: "Choose Service Provider",
-              hintStyle: TextStyle(
-                color: Colors.grey.shade400,
-                fontSize: 15.0,
-              ),
+              validator: (value) {
+                if (value == null) {
+                  return 'Please select a network';
+                }
+                return ValidationBuilder().required().build()(value.name);
+              },
             ),
-            validator: (value) {
-              if (value == null) {
-                return 'Please select a network';
-              }
-              return ValidationBuilder().required().build()(value.name);
-            },
-          ),
+
           const SizedBox(height: 15.0),
 
           const Text(
@@ -398,7 +407,7 @@ class ElectricityWidget extends StatelessWidget {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(7.0),
-                color: const Color(0XFF07B46B),
+                color: mainGreen,
               ),
               child: (!controller.isLoading)
                   ? (Text(
@@ -414,7 +423,8 @@ class ElectricityWidget extends StatelessWidget {
                       size: 40,
                     ),
             ),
-          )
+          ),
+          const SizedBox(height: 50,),
         ],
       ),
     );

@@ -13,6 +13,7 @@ const String imgBaseUrlDev = "http://192.168.1.168/deeventures/";  // developmen
 */
 const String loginUserRoute = "/users/login";
 const String registerUserRoute = "/users/signup";
+const String updatePasswordRoute = "/users/update_password";
 
 /*
 * Users API Routes.
@@ -28,6 +29,7 @@ const String getTopTradersRoute = "/users/get_top_traders";
 const String getUserWalletRoute = "/wallets/user_wallet";
 const String getUserReferralWalletRoute = "/wallets/user_referral_wallet";
 const String depositMoneyRoute = "/wallets/deposit_money";
+const String withdrawMoneyRoute = "/wallets/withdraw_money";
 
 /*
 * Cryptocurrency API Routes.
@@ -45,8 +47,9 @@ const String getCryptocurrencyRoute = "https://api.pro.coinbase.com/products";
 * Gift Card API Routes.
 */
 const String getGiftCardsRoute = "/gift_cards/all_gift_cards";
+const String getGiftCardRateRoute = "/gift_cards/gift_card_rates";
 const String getGiftCardRoute = "/gift_cards/single_gift_card";
-
+const String sellGiftCardRoute = "/gift_cards/sell_gift_card";
 /*
 * Bill Payment API Routes.
 */
@@ -57,7 +60,7 @@ const String getInternetServiceProvidersRoute = "/bills_payment/all_data_bundles
 const String getInternetServiceProvidersCommissionRoute = "/data_plans/single_data_plan";
 const String buyInternetRoute = "/bills_payment/buy_data_bundle";
 
-const String getElectricityCompaniesRoute = "/bills_payment/all_electric_companies";
+const String getElectricityCompaniesRoute = "/electricity_companies/all_electricity_companies";
 const String getMeterTypesRoute = "/electricity_companies/all_meter_types";
 const String getElectricityCompaniesCommissionRoute = "/electricity_companies/single_electricity_company";
 const String buyElectricityRoute = "/bills_payment/buy_electricity";

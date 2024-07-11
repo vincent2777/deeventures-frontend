@@ -1,9 +1,11 @@
 import 'package:deeventures/screens/billPayment/bill_payment_screen.dart';
 import 'package:deeventures/screens/setting/setting_screen.dart';
+import 'package:deeventures/screens/setting/web_view.dart';
 import 'package:deeventures/screens/tradeGiftCard/trade_gift_card_screen.dart';
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
 
+import '../../screens/tradeGiftCard/trade_gift_card_screen2.dart';
 import 'app_route_names.dart';
 import '../../screens/auths/login_screen.dart';
 import '../../screens/auths/register_screen.dart';
@@ -90,6 +92,15 @@ List<GetPage<dynamic>> getPages = [
     curve: Curves.easeIn,
   ),
 
+  // Dashboard -> Trade Gift Card Screens step 2.
+  GetPage(
+    name: tradeGiftCardScreen2,
+    page: () => TradeGiftCardScreen2(),
+    transition: Transition.rightToLeft,
+    transitionDuration: const Duration(milliseconds: 700),
+    curve: Curves.easeIn,
+  ),
+
   // Dashboard -> Bill Payment Screens.
   GetPage(
     name: billPaymentScreen,
@@ -158,6 +169,18 @@ List<GetPage<dynamic>> getPages = [
   GetPage(
     name: settingsScreen,
     page: () => SettingScreen(),
+    transition: Transition.rightToLeft,
+    transitionDuration: const Duration(milliseconds: 200),
+    curve: Curves.easeIn,
+  ),
+
+  // Webview Screens.
+  GetPage(
+    name: webViewScreen,
+    page: () => WebView(
+      pageLink: Get.parameters['pageLink'] ?? "",
+      pageTitle: Get.parameters['pageTitle'] ?? "",
+    ),
     transition: Transition.rightToLeft,
     transitionDuration: const Duration(milliseconds: 200),
     curve: Curves.easeIn,

@@ -159,8 +159,10 @@ class TopTradersWeekScreen extends StatelessWidget {
                                     width: 115.0,
                                     margin: const EdgeInsets.only(top: 10.0),
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50.0),
+                                      // borderRadius: BorderRadius.circular(50.0),
                                       color: const Color(0XFF09A060),
+                                        shape: BoxShape.circle
+
                                     ),
                                     child: Center(
                                       child: Text(
@@ -229,11 +231,13 @@ class TopTradersWeekScreen extends StatelessWidget {
                                 children: [
                                   Container(
                                     height: 100.0,
-                                    width: 115.0,
+                                    width: 100.0,
                                     margin: const EdgeInsets.only(top: 10.0),
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50.0),
+                                      // borderRadius: BorderRadius.circular(50.0),
                                       color: Colors.grey.shade400,
+                                        shape: BoxShape.circle
+
                                     ),
                                     child: const Center(
                                       child: Text(

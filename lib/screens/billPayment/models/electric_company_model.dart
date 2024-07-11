@@ -17,6 +17,17 @@ class ElectricCompany {
     this.name,
   });
 
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is ElectricCompany &&
+              runtimeType == other.runtimeType &&
+              code == other.code &&
+              name == other.name;
+
+  @override
+  int get hashCode => code.hashCode ^ name.hashCode;
+
   factory ElectricCompany.fromJson(Map<String, dynamic> json) => ElectricCompany(
     code: json["code"],
     name: json["name"],

@@ -10,19 +10,14 @@ class PromoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return SafeArea(child: Scaffold(
 
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
             Get.back();
           },
-          icon: Image.asset(
-            "assets/images/arrow_back.png",
-            height: 17.0,
-            width: 30.0,
-            color: Colors.grey.shade700,
-          ),
+          icon: const Icon(Icons.chevron_left_outlined),
         ),
 
         title: Text(
@@ -37,36 +32,36 @@ class PromoScreen extends StatelessWidget {
       ),
 
       body: GetBuilder<PromoStateController>(builder: (controller) {
-          return Container(
-            height: Get.height,
-            width: Get.width,
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 25.0),
-            child: Column(
-              // crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(15.0),
-                  child: Image.asset(
-                    "assets/images/promo.png",
-                    height: 420.0,
-                    width: Get.width,
-                    fit: BoxFit.cover,
-                  ),
+        return Container(
+          height: Get.height,
+          width: Get.width,
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 25.0),
+          child: Column(
+            // crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(15.0),
+                child: Image.asset(
+                  "assets/images/promo.png",
+                  height: 420.0,
+                  width: Get.width,
+                  fit: BoxFit.cover,
                 ),
-                const SizedBox(height: 20.0),
+              ),
+              const SizedBox(height: 20.0),
 
-                Text(
-                  "Coming soon...",
-                  style: TextStyle(
-                      color: Colors.grey.shade700,
-                      fontWeight: FontWeight.w600
-                  ),
+              Text(
+                "Coming soon...",
+                style: TextStyle(
+                    color: Colors.grey.shade700,
+                    fontWeight: FontWeight.w600
                 ),
-              ],
-            ),
-          );
-        }
+              ),
+            ],
+          ),
+        );
+      }
       ),
-    );
+    ));
   }
 }

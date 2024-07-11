@@ -21,12 +21,7 @@ class BillPaymentScreen extends StatelessWidget {
                 onPressed: () {
                   Get.back();
                 },
-                icon: Image.asset(
-                  "assets/images/arrow_back.png",
-                  height: 17.0,
-                  width: 30.0,
-                  color: Colors.grey.shade700,
-                ),
+                icon: const Icon(Icons.chevron_left_outlined),
               ),
 
               title: Text(

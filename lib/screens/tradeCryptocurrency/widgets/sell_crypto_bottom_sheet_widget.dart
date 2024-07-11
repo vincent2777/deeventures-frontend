@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
+import '../../../utils/colors.dart';
 import '../../transactions/widgets/upload_image_bottom_sheet_widget.dart';
 import '../controllers/trade_cryptocurrency_state_controller.dart';
 
@@ -201,7 +202,7 @@ class SellCryptoBottomSheetWidget {
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(7.0),
-                                        color: const Color(0XFF07B46B),
+                                        color: mainGreen,
                                       ),
                                       child: (!controller.isSellCryptoLoading) ?
                                       const Text(
@@ -415,7 +416,7 @@ class SellCryptoBottomSheetWidget {
                                   alignment: Alignment.center,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(7.0),
-                                    color: const Color(0XFF07B46B),
+                                    color: mainGreen,
                                   ),
                                   child: const Text(
                                     "I Have Transferred the Coin",

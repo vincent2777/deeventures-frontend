@@ -1,9 +1,11 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../../../utils/colors.dart';
 import '../controllers/wallet_state_controller.dart';
 
 
@@ -329,27 +331,25 @@ class WithdrawMoneyBottomSheetWidget {
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(7.0),
-                                            color: const Color(0XFF07B46B),
+                                            color: mainGreen,
                                           ),
                                           child: (!controller.isLoading) ?
                                           const Text(
-                                            "Submit",
+                                            "Continue",
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 16.0,
                                                 fontWeight: FontWeight.w600
                                             ),
                                           ) :
-                                          const SizedBox(
-                                            height: 20.0,
-                                            width: 20.0,
-                                            child: CircularProgressIndicator(
-                                              color: Colors.white,
-                                              strokeWidth: 2.0,
-                                            ),
+                                          const SpinKitCircle(
+                                            color: Colors.white,
+                                            size: 40,
                                           ),
                                         ),
                                       ),
+
+                                      const SizedBox(height: 50,)
                                     ],
                                   ),
                                 );
@@ -381,7 +381,6 @@ class WithdrawMoneyBottomSheetWidget {
                       children: [
                         const SizedBox(height: 10.0),
 
-                        //  Close Button.
                         Align(
                             alignment: Alignment.centerRight,
                             child: IconButton(
@@ -395,7 +394,6 @@ class WithdrawMoneyBottomSheetWidget {
                               ),
                             )
                         ),
-
 
                         Text(
                           "Account Details",
@@ -601,7 +599,8 @@ class WithdrawMoneyBottomSheetWidget {
                         //  Submit Button.
                         TextButton(
                           onPressed: () {
-                            Get.back();
+                            // Get.back();
+                            controller.withdrawMoney();
                           },
                           style: TextButton.styleFrom(
                             padding: EdgeInsets.zero,
@@ -611,16 +610,19 @@ class WithdrawMoneyBottomSheetWidget {
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(7.0),
-                              color: const Color(0XFF07B46B),
+                              color: mainGreen,
                             ),
-                            child: const Text(
+                            child: !controller.isLoading ?  const Text(
                               "Submit",
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.w600
                               ),
-                            ),
+                            ) : const SpinKitCircle(
+                            color: Colors.white,
+                            size: 40,
+                          ),
                           ),
                         ),
                         const SizedBox(height: 15.0),

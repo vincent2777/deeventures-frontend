@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../../../utils/colors.dart';
 import '../controllers/transactions_state_controller.dart';
 import 'upload_image_bottom_sheet_widget.dart';
 
@@ -64,25 +65,14 @@ class TransactionDetailsBottomSheetWidget {
                                 fontWeight: FontWeight.w800,
                               ),
                             ),
-                            const SizedBox(height: 20.0,),
+                            const SizedBox(height: 30.0,),
 
                             // Transaction Type
                             Row(
                               children: [
                                 Row(
                                   children: [
-                                    Container(
-                                      height: 35.0,
-                                      width: 35.0,
-                                      padding: const EdgeInsets.all(8.0),
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(14.0),
-                                          color: const Color(0xffbebebe)
-                                      ),
-                                      child: Image.asset(
-                                        "assets/images/launcher_icon.png",
-                                      ),
-                                    ),
+                                    const Icon(Icons.bar_chart,size: 18,),
                                     const SizedBox(width: 10.0,),
 
                                     Text(
@@ -107,29 +97,21 @@ class TransactionDetailsBottomSheetWidget {
                                 )
                               ],
                             ),
+                            const SizedBox(height: 10,),
+
                             const Divider(
                               endIndent: 0.0,
                               indent: 0.0,
                               color: Color(0xFFE8E8E8),
                             ),
+                            const SizedBox(height: 10,),
 
                             // Transaction Amount
                             Row(
                               children: [
                                 Row(
                                   children: [
-                                    Container(
-                                      height: 35.0,
-                                      width: 35.0,
-                                      padding: const EdgeInsets.all(8.0),
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(14.0),
-                                          color: const Color(0xffbebebe)
-                                      ),
-                                      child: Image.asset(
-                                        "assets/images/launcher_icon.png",
-                                      ),
-                                    ),
+                                    const Icon(Icons.money,size: 18,),
                                     const SizedBox(width: 10.0,),
 
                                     Text(
@@ -155,29 +137,21 @@ class TransactionDetailsBottomSheetWidget {
                                 )
                               ],
                             ),
+                            const SizedBox(height: 10,),
+
                             const Divider(
                               endIndent: 0.0,
                               indent: 0.0,
                               color: Color(0xFFE8E8E8),
                             ),
+                            const SizedBox(height: 10,),
 
                             // Transaction Rate
                             Row(
                               children: [
                                 Row(
                                   children: [
-                                    Container(
-                                      height: 35.0,
-                                      width: 35.0,
-                                      padding: const EdgeInsets.all(8.0),
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(14.0),
-                                          color: const Color(0xffbebebe)
-                                      ),
-                                      child: Image.asset(
-                                        "assets/images/launcher_icon.png",
-                                      ),
-                                    ),
+                                    const Icon(Icons.percent,size: 18,),
                                     const SizedBox(width: 10.0,),
 
                                     Text(
@@ -203,29 +177,21 @@ class TransactionDetailsBottomSheetWidget {
                                 )
                               ],
                             ),
+                            const SizedBox(height: 10,),
+
                             const Divider(
                               endIndent: 0.0,
                               indent: 0.0,
                               color: Color(0xFFE8E8E8),
                             ),
+                            const SizedBox(height: 10,),
 
                             // Amount To Receive
                             Row(
                               children: [
                                 Row(
                                   children: [
-                                    Container(
-                                      height: 35.0,
-                                      width: 35.0,
-                                      padding: const EdgeInsets.all(8.0),
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(14.0),
-                                          color: const Color(0xffbebebe)
-                                      ),
-                                      child: Image.asset(
-                                        "assets/images/launcher_icon.png",
-                                      ),
-                                    ),
+                                    const Icon(Icons.arrow_circle_down_sharp,size: 18,),
                                     const SizedBox(width: 10.0,),
 
                                     Text(
@@ -251,11 +217,14 @@ class TransactionDetailsBottomSheetWidget {
                                 )
                               ],
                             ),
+                            const SizedBox(height: 10,),
+
                             const Divider(
                               endIndent: 0.0,
                               indent: 0.0,
                               color: Color(0xFFE8E8E8),
                             ),
+                            const SizedBox(height: 10,),
 
                             // Date | Time
                             Row(
@@ -263,22 +232,11 @@ class TransactionDetailsBottomSheetWidget {
                               children: [
                                 Row(
                                   children: [
-                                    Container(
-                                      height: 35.0,
-                                      width: 35.0,
-                                      padding: const EdgeInsets.all(8.0),
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(14.0),
-                                          color: const Color(0xffbebebe)
-                                      ),
-                                      child: Image.asset(
-                                        "assets/images/launcher_icon.png",
-                                      ),
-                                    ),
+                                    const Icon(Icons.calendar_month,size: 18,),
                                     const SizedBox(width: 10.0,),
 
                                     Text(
-                                      "Date|Time",
+                                      "Date",
                                       style: TextStyle(
                                         color: Colors.grey.shade500,
                                         fontSize: 12.0,
@@ -298,11 +256,15 @@ class TransactionDetailsBottomSheetWidget {
                                 )
                               ],
                             ),
+                            const SizedBox(height: 10,),
+
                             const Divider(
                               endIndent: 0.0,
                               indent: 0.0,
                               color: Color(0xFFE8E8E8),
                             ),
+                            const SizedBox(height: 10,),
+
 
                             // Transaction Reference
                             Row(
@@ -310,18 +272,7 @@ class TransactionDetailsBottomSheetWidget {
                               children: [
                                 Row(
                                   children: [
-                                    Container(
-                                      height: 35.0,
-                                      width: 35.0,
-                                      padding: const EdgeInsets.all(8.0),
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(14.0),
-                                          color: const Color(0xffbebebe)
-                                      ),
-                                      child: Image.asset(
-                                        "assets/images/launcher_icon.png",
-                                      ),
-                                    ),
+                                    const Icon(Icons.pin,size: 18,),
                                     const SizedBox(width: 10.0,),
 
                                     Text(
@@ -345,27 +296,20 @@ class TransactionDetailsBottomSheetWidget {
                                 )
                               ],
                             ),
+                            const SizedBox(height: 10,),
+
                             const Divider(
                               endIndent: 0.0,
                               indent: 0.0,
                               color: Color(0xFFE8E8E8),
                             ),
+                            const SizedBox(height: 10,),
+
 
                             (controller.transaction.trnxType == "Coin Sell") ? (
                                 Row(
                                   children: [
-                                    Container(
-                                      height: 35.0,
-                                      width: 35.0,
-                                      padding: const EdgeInsets.all(8.0),
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(14.0),
-                                          color: const Color(0xffbebebe)
-                                      ),
-                                      child: Image.asset(
-                                        "assets/images/launcher_icon.png",
-                                      ),
-                                    ),
+                                    const Icon(Icons.wallet,size: 18,),
                                     const SizedBox(width: 10.0,),
 
                                     Column(
@@ -396,28 +340,18 @@ class TransactionDetailsBottomSheetWidget {
                                     ),
                                   ],
                                 )
-                            ) : (controller.transaction.trnxType == "Gift Card Sale") ? (
+                            ) : (controller.transaction.trnxType == "Gift Card Sell") ? (
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Row(
                                       children: [
-                                        Container(
-                                          height: 35.0,
-                                          width: 35.0,
-                                          padding: const EdgeInsets.all(8.0),
-                                          decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(14.0),
-                                              color: const Color(0xffbebebe)
-                                          ),
-                                          child: Image.asset(
-                                            "assets/images/launcher_icon.png",
-                                          ),
-                                        ),
+                                        const Icon(Icons.wallet_giftcard,size: 18,),
+
                                         const SizedBox(width: 10.0,),
 
                                         Text(
-                                          "Gift Card ID:",
+                                          "Gift Card:",
                                           style: TextStyle(
                                             color: Colors.grey.shade500,
                                             fontSize: 12.0,
@@ -444,22 +378,11 @@ class TransactionDetailsBottomSheetWidget {
                                   children: [
                                     Row(
                                       children: [
-                                        Container(
-                                          height: 35.0,
-                                          width: 35.0,
-                                          padding: const EdgeInsets.all(8.0),
-                                          decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(14.0),
-                                              color: const Color(0xffbebebe)
-                                          ),
-                                          child: Image.asset(
-                                            "assets/images/launcher_icon.png",
-                                          ),
-                                        ),
+                                        const Icon(Icons.numbers,size: 18,),
                                         const SizedBox(width: 10.0,),
 
                                         Text(
-                                          "Meter Number:",
+                                          "Number:",
                                           style: TextStyle(
                                             color: Colors.grey.shade500,
                                             fontSize: 12.0,
@@ -486,22 +409,12 @@ class TransactionDetailsBottomSheetWidget {
                                   children: [
                                     Row(
                                       children: [
-                                        Container(
-                                          height: 35.0,
-                                          width: 35.0,
-                                          padding: const EdgeInsets.all(8.0),
-                                          decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(14.0),
-                                              color: const Color(0xffbebebe)
-                                          ),
-                                          child: Image.asset(
-                                            "assets/images/launcher_icon.png",
-                                          ),
-                                        ),
+                                        const Icon(Icons.wallet,size: 18,),
+
                                         const SizedBox(width: 10.0,),
 
                                         Text(
-                                          "Wallet ID:",
+                                          "Wallet:",
                                           style: TextStyle(
                                             color: Colors.grey.shade500,
                                             fontSize: 12.0,
@@ -525,29 +438,22 @@ class TransactionDetailsBottomSheetWidget {
                             ) : (
                                 const SizedBox()
                             ),
+                            const SizedBox(height: 10,),
+
                             const Divider(
                               endIndent: 0.0,
                               indent: 0.0,
                               color: Color(0xFFE8E8E8),
                             ),
+                            const SizedBox(height: 10,),
+
 
                             // Transaction Status
                             Row(
                               children: [
                                 Row(
                                   children: [
-                                    Container(
-                                      height: 35.0,
-                                      width: 35.0,
-                                      padding: const EdgeInsets.all(8.0),
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(14.0),
-                                          color: const Color(0xffbebebe)
-                                      ),
-                                      child: Image.asset(
-                                        "assets/images/launcher_icon.png",
-                                      ),
-                                    ),
+                                    const Icon(Icons.query_stats,size: 18,),
                                     const SizedBox(width: 10.0,),
 
                                     Text(
@@ -610,7 +516,7 @@ class TransactionDetailsBottomSheetWidget {
                                   alignment: Alignment.center,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(7.0),
-                                    color: const Color(0XFF07B46B),
+                                    color: mainGreen,
                                   ),
                                   child: const Text(
                                     "Upload Proof",

@@ -22,6 +22,7 @@ const String cryptocurrencyDetailScreen = "/cryptocurrencyDetailScreen";
 
 // Dashboard -> Trade Gift Card Screens.
 const String tradeGiftCardScreen = "/tradeGiftCardScreen";
+const String tradeGiftCardScreen2 = "/tradeGiftCardScreen2";
 
 // Dashboard -> Bill Payment Screens.
 const String billPaymentScreen = "/billPaymentScreen";
@@ -47,3 +48,7 @@ const String customerSupportScreen = "/customerSupportScreen";
 
 // Settings Screen
 const String settingsScreen = "/settingsScreen";
+
+
+// webviewScreen Screen
+const String webViewScreen = "/webViewScreen";
