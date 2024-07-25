@@ -3,8 +3,8 @@
 */
 // const String baseURL = "http://10.0.2.2:5000/api/v1"; //  Emulator
 // const String baseURL = "http://192.168.0.35:5000/api/v1"; // Development
-const String baseURL = "http://192.168.1.168:9000/api/v1"; // Development
-const String imgBaseUrlProd = "https://deeventures.com.ng/";  // Production
+const String baseURL = "https://www.damezgroup.com/deeventure-apis/api/v1"; //"http://192.168.1.168:9000/api/v1"; // Development
+const String imgBaseUrlProd = "https://app.deeventures.com.ng/";  // Production
 const String imgBaseUrlDev = "http://192.168.1.168/deeventures/";  // development
 
 

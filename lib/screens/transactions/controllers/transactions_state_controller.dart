@@ -67,12 +67,14 @@ class TransactionsStateController extends GetxController with GetSingleTickerPro
   void setTransactionType(value) {
     _transactionType = value;
     update();
-    getTransactions(0);
+    _pagingController.refresh();
   }
   void setTransactionStatus(String value) {
     _transactionStatus = value;
     update();
-    getTransactions(0);
+    _pagingController.refresh(); // This will trigger a new request starting from page 1
+
+    // getTransactions(0);
   }
   void setTransaction(Transaction value) {
     _transaction = value;
@@ -89,59 +91,65 @@ class TransactionsStateController extends GetxController with GetSingleTickerPro
 
 
   @override
-  void onInit() async {
+  void onInit() {
     _pagingController.addPageRequestListener((pageKey) {
       getTransactions(pageKey);
     });
 
     _tabController = TabController(vsync: this, length: 4);
     _tabController.addListener(() {
-      (_tabController.index == 0) ? (
-          setTransactionStatus("")
-      ) : (_tabController.index == 1) ? (
-          setTransactionStatus("1")
-      ) : (_tabController.index == 2) ? (
-          setTransactionStatus("0")
-      ) : (
-          setTransactionStatus("2")
-      );
+      String newStatus = "";
+      switch (_tabController.index) {
+        case 0: newStatus = ""; break;
+        case 1: newStatus = "1"; break;
+        case 2: newStatus = "0"; break;
+        case 3: newStatus = "2"; break;
+      }
+      if (newStatus != _transactionStatus) {
+        _transactionStatus = newStatus;
+        _pagingController.refresh();
+      }
     });
 
     super.onInit();
   }
-
   Future<void> getTransactions(int pageKey) async {
-    // First clear the Transaction list before re-fetching.
-    pagingController.itemList = [];
+    // Convert pageKey to start from 1 if it's 0
+    int page = (pageKey == 0) ? 1 : pageKey;
 
     String? token = await _flutterSecureStorage.read(key: "token");
     String decodedToken = jsonDecode(token!);
-    pageKey = (pageKey > 0) ? pageKey : 1;
-    String transactionPaginatedRoute = "$getTransactionsRoute?type=$_transactionType&status=$_transactionStatus&limit=$_pageSize&page=$pageKey";
+    String transactionPaginatedRoute = "$getTransactionsRoute?type=$_transactionType&status=$_transactionStatus&limit=$_pageSize&page=$page";
 
     var response = await TransactionAPI.getTransactionsService(transactionPaginatedRoute, decodedToken);
     bool isSuccess = response!.data["success"];
 
     if (isSuccess) {
       List<dynamic> transactionData = response.data["data"]["transactions"] ?? [];
-      List<Transaction> transactions = transactionData.map((eachTransaction) => Transaction.fromJson(eachTransaction)).toList();
-      setTransactions(transactions);
+      List<Transaction> newTransactions = transactionData.map((eachTransaction) => Transaction.fromJson(eachTransaction)).toList();
 
-      // Check for last page.
-      final bool isLastPage = transactions.length < _pageSize;
+      // Check if it's the first page
+      if (page == 1) {
+        _transactions.clear();
+        _pagingController.itemList?.clear();
+      }
+
+      _transactions.addAll(newTransactions);
+      setTransactions(_transactions);
+
+      final bool isLastPage = newTransactions.length < _pageSize;
       if (isLastPage) {
-        _pagingController.appendLastPage(transactions);
+        _pagingController.appendLastPage(newTransactions);
       } else {
-        final nextPageKey = pageKey + 1;
-        _pagingController.appendPage(transactions, nextPageKey);
+        final nextPageKey = page + 1;
+        _pagingController.appendPage(newTransactions, nextPageKey);
       }
     } else {
       String errorMessage = response.data["message"];
       debugPrint("Oooops!!! $errorMessage");
-      // _appToastWidget.notification("Oooops!", errorMessage, "Error");
+      _pagingController.error = errorMessage;
     }
   }
-
 
   //  Pick an Image.
   Future<void> takeImage(ImageSource imageSource) async {

@@ -16,7 +16,7 @@ class CryptocurrencyAPI {
   //  Get Cryptocurrency.
   static Future<Response?> getCryptocurrenciesService(String getCryptocurrenciesRoute, String token) async {
     var fullURL = "$baseURL$getCryptocurrenciesRoute";
-    // debugPrint("URL::: $fullURL");
+    debugPrint("URL::: $fullURL");
 
     try {
       return await Dio().get(

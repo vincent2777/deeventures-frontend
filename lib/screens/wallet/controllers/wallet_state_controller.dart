@@ -189,6 +189,7 @@ class WalletStateController extends GetxController {
   }
 
   Future<void> depositMoney() async {
+    setIsLoading(true);
     String userData = await _flutterSecureStorage.read(key: "userData") ?? "";
     Map<String, dynamic> decodedLoggedInUser = jsonDecode(userData);
 
@@ -218,7 +219,7 @@ class WalletStateController extends GetxController {
       Map<String, dynamic> settingsData = responseData["settings"];
       Map<String, dynamic> transactionData = responseData["transaction"];
       setAccountSettings(settingFromJson(settingsData));
-      _transactionsStateController.setTransaction(transactionFromJson(transactionData));
+      // _transactionsStateController.setTransaction(transactionFromJson(transactionData));
       setShowDepositDetails(true);
       _appToastWidget.notification("Congratulations!", message, "Success");
 
@@ -231,6 +232,7 @@ class WalletStateController extends GetxController {
   }
 
   Future<void> withdrawMoney() async {
+    setIsLoading(true);
     String userData = await _flutterSecureStorage.read(key: "userData") ?? "";
     Map<String, dynamic> decodedLoggedInUser = jsonDecode(userData);
 

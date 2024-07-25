@@ -25,7 +25,7 @@ class DepositMoneyBottomSheetWidget {
           return (!controller.showDepositDetails) ? (
               ConstrainedBox(
                   constraints: BoxConstraints(
-                      maxHeight: Get.height / 1.8
+                      maxHeight: Get.height / 2.4
                   ),
                   child: Container(
                     height: Get.height,
@@ -184,7 +184,7 @@ class DepositMoneyBottomSheetWidget {
           ) : (
               ConstrainedBox(
                   constraints: BoxConstraints(
-                      maxHeight: Get.height / 1.8
+                      maxHeight: Get.height / 1.7
                   ),
                   child: Container(
                     height: Get.height,
@@ -231,18 +231,8 @@ class DepositMoneyBottomSheetWidget {
                             children: [
                               Row(
                                 children: [
-                                  Container(
-                                    height: 35.0,
-                                    width: 35.0,
-                                    padding: const EdgeInsets.all(8.0),
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(14.0),
-                                        color: const Color(0xffbebebe)
-                                    ),
-                                    child: Image.asset(
-                                      "assets/images/launcher_icon.png",
-                                    ),
-                                  ),
+                                  const Icon(Icons.numbers, size: 18,),
+
                                   const SizedBox(width: 10.0,),
 
                                   Text(
@@ -267,29 +257,22 @@ class DepositMoneyBottomSheetWidget {
                               )
                             ],
                           ),
+                          const SizedBox(height: 10.0),
+
                           const Divider(
                             endIndent: 0.0,
                             indent: 0.0,
                             color: Color(0xFFE8E8E8),
                           ),
+                          const SizedBox(height: 10.0),
 
                           // Account Name
                           Row(
                             children: [
                               Row(
                                 children: [
-                                  Container(
-                                    height: 35.0,
-                                    width: 35.0,
-                                    padding: const EdgeInsets.all(8.0),
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(14.0),
-                                        color: const Color(0xffbebebe)
-                                    ),
-                                    child: Image.asset(
-                                      "assets/images/launcher_icon.png",
-                                    ),
-                                  ),
+                                  const Icon(Icons.person, size: 18,),
+
                                   const SizedBox(width: 10.0,),
 
                                   Text(
@@ -314,29 +297,22 @@ class DepositMoneyBottomSheetWidget {
                               )
                             ],
                           ),
+                          const SizedBox(height: 10.0),
+
                           const Divider(
                             endIndent: 0.0,
                             indent: 0.0,
                             color: Color(0xFFE8E8E8),
                           ),
+                          const SizedBox(height: 10.0),
 
                           // Bank Name
                           Row(
                             children: [
                               Row(
                                 children: [
-                                  Container(
-                                    height: 35.0,
-                                    width: 35.0,
-                                    padding: const EdgeInsets.all(8.0),
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(14.0),
-                                        color: const Color(0xffbebebe)
-                                    ),
-                                    child: Image.asset(
-                                      "assets/images/launcher_icon.png",
-                                    ),
-                                  ),
+                                  const Icon(Icons.place_outlined, size: 18,),
+
                                   const SizedBox(width: 10.0,),
 
                                   Text(
@@ -361,29 +337,22 @@ class DepositMoneyBottomSheetWidget {
                               )
                             ],
                           ),
+                          const SizedBox(height: 10.0),
+
                           const Divider(
                             endIndent: 0.0,
                             indent: 0.0,
                             color: Color(0xFFE8E8E8),
                           ),
+                          const SizedBox(height: 10.0),
 
                           // Amount
                           Row(
                             children: [
                               Row(
                                 children: [
-                                  Container(
-                                    height: 35.0,
-                                    width: 35.0,
-                                    padding: const EdgeInsets.all(8.0),
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(14.0),
-                                        color: const Color(0xffbebebe)
-                                    ),
-                                    child: Image.asset(
-                                      "assets/images/launcher_icon.png",
-                                    ),
-                                  ),
+                                  const Icon(Icons.money, size: 18,),
+
                                   const SizedBox(width: 10.0,),
 
                                   Text(
@@ -409,11 +378,14 @@ class DepositMoneyBottomSheetWidget {
                               )
                             ],
                           ),
+                          const SizedBox(height: 10.0),
+
                           const Divider(
                             endIndent: 0.0,
                             indent: 0.0,
                             color: Color(0xFFE8E8E8),
                           ),
+                          const SizedBox(height: 10.0),
 
                           // Instruction
                           Row(
@@ -421,18 +393,8 @@ class DepositMoneyBottomSheetWidget {
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Container(
-                                    height: 35.0,
-                                    width: 35.0,
-                                    padding: const EdgeInsets.all(8.0),
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(14.0),
-                                        color: const Color(0xffbebebe)
-                                    ),
-                                    child: Image.asset(
-                                      "assets/images/launcher_icon.png",
-                                    ),
-                                  ),
+                                  const Icon(Icons.info_outline_rounded, size: 18,),
+
                                   const SizedBox(width: 10.0,),
 
                                   Column(

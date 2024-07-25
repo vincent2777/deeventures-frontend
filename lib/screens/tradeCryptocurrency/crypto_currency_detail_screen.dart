@@ -311,7 +311,11 @@ class CryptocurrencyDetailScreen extends StatelessWidget {
                       (controller.currencyNetwork.networkAddress != null) ? (
                           TextButton(
                             onPressed: () {
-                              SellCryptoBottomSheetWidget.tradeCryptocurrencyStateController();
+                              if(controller.currencyNetwork != null){
+                                SellCryptoBottomSheetWidget.tradeCryptocurrencyStateController();
+                              }else{
+                                controller.appToastWidget.notification("Oooops!", "Select a Network", "Error");
+                              }
                             },
                             style: TextButton.styleFrom(
                               padding: EdgeInsets.zero,

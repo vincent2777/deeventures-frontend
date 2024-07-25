@@ -70,18 +70,8 @@ class AccountDetailsBottomSheetWidget {
                               children: [
                                 Row(
                                   children: [
-                                    Container(
-                                      height: 35.0,
-                                      width: 35.0,
-                                      padding: const EdgeInsets.all(8.0),
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(14.0),
-                                          color: const Color(0xffbebebe)
-                                      ),
-                                      child: Image.asset(
-                                        "assets/images/launcher_icon.png",
-                                      ),
-                                    ),
+                                    const Icon(Icons.numbers, size: 18,),
+
                                     const SizedBox(width: 10.0,),
 
                                     Text(
@@ -117,18 +107,7 @@ class AccountDetailsBottomSheetWidget {
                               children: [
                                 Row(
                                   children: [
-                                    Container(
-                                      height: 35.0,
-                                      width: 35.0,
-                                      padding: const EdgeInsets.all(8.0),
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(14.0),
-                                          color: const Color(0xffbebebe)
-                                      ),
-                                      child: Image.asset(
-                                        "assets/images/launcher_icon.png",
-                                      ),
-                                    ),
+                                    const Icon(Icons.person, size: 18,),
                                     const SizedBox(width: 10.0,),
 
                                     Text(
@@ -164,18 +143,8 @@ class AccountDetailsBottomSheetWidget {
                               children: [
                                 Row(
                                   children: [
-                                    Container(
-                                      height: 35.0,
-                                      width: 35.0,
-                                      padding: const EdgeInsets.all(8.0),
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(14.0),
-                                          color: const Color(0xffbebebe)
-                                      ),
-                                      child: Image.asset(
-                                        "assets/images/launcher_icon.png",
-                                      ),
-                                    ),
+                                    const Icon(Icons.place_outlined, size: 18,),
+
                                     const SizedBox(width: 10.0,),
 
                                     Text(
@@ -211,18 +180,8 @@ class AccountDetailsBottomSheetWidget {
                               children: [
                                 Row(
                                   children: [
-                                    Container(
-                                      height: 35.0,
-                                      width: 35.0,
-                                      padding: const EdgeInsets.all(8.0),
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(14.0),
-                                          color: const Color(0xffbebebe)
-                                      ),
-                                      child: Image.asset(
-                                        "assets/images/launcher_icon.png",
-                                      ),
-                                    ),
+                                    const Icon(Icons.money, size: 18,),
+
                                     const SizedBox(width: 10.0,),
 
                                     Text(
@@ -260,18 +219,8 @@ class AccountDetailsBottomSheetWidget {
                               children: [
                                 Row(
                                   children: [
-                                    Container(
-                                      height: 35.0,
-                                      width: 35.0,
-                                      padding: const EdgeInsets.all(8.0),
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(14.0),
-                                          color: const Color(0xffbebebe)
-                                      ),
-                                      child: Image.asset(
-                                        "assets/images/launcher_icon.png",
-                                      ),
-                                    ),
+                                    const Icon(Icons.info_outline_rounded, size: 18,),
+
                                     const SizedBox(width: 10.0,),
 
                                     Text(

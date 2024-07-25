@@ -411,18 +411,7 @@ class WithdrawMoneyBottomSheetWidget {
                           children: [
                             Row(
                               children: [
-                                Container(
-                                  height: 35.0,
-                                  width: 35.0,
-                                  padding: const EdgeInsets.all(8.0),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(14.0),
-                                      color: const Color(0xffbebebe)
-                                  ),
-                                  child: Image.asset(
-                                    "assets/images/launcher_icon.png",
-                                  ),
-                                ),
+                                const Icon(Icons.numbers,size: 18,),
                                 const SizedBox(width: 10.0,),
 
                                 Text(
@@ -447,29 +436,22 @@ class WithdrawMoneyBottomSheetWidget {
                             )
                           ],
                         ),
+                        SizedBox(height: 10,),
+
                         const Divider(
                           endIndent: 0.0,
                           indent: 0.0,
                           color: Color(0xFFE8E8E8),
                         ),
+                        SizedBox(height: 10,),
 
                         // Account Name
                         Row(
                           children: [
                             Row(
                               children: [
-                                Container(
-                                  height: 35.0,
-                                  width: 35.0,
-                                  padding: const EdgeInsets.all(8.0),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(14.0),
-                                      color: const Color(0xffbebebe)
-                                  ),
-                                  child: Image.asset(
-                                    "assets/images/launcher_icon.png",
-                                  ),
-                                ),
+                                const Icon(Icons.person,size: 18,),
+
                                 const SizedBox(width: 10.0,),
 
                                 Text(
@@ -494,29 +476,22 @@ class WithdrawMoneyBottomSheetWidget {
                             )
                           ],
                         ),
+                        SizedBox(height: 10,),
+
                         const Divider(
                           endIndent: 0.0,
                           indent: 0.0,
                           color: Color(0xFFE8E8E8),
                         ),
+                        SizedBox(height: 10,),
 
                         // Bank Name
                         Row(
                           children: [
                             Row(
                               children: [
-                                Container(
-                                  height: 35.0,
-                                  width: 35.0,
-                                  padding: const EdgeInsets.all(8.0),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(14.0),
-                                      color: const Color(0xffbebebe)
-                                  ),
-                                  child: Image.asset(
-                                    "assets/images/launcher_icon.png",
-                                  ),
-                                ),
+                                const Icon(Icons.place_outlined,size: 18,),
+
                                 const SizedBox(width: 10.0,),
 
                                 Text(
@@ -541,29 +516,21 @@ class WithdrawMoneyBottomSheetWidget {
                             )
                           ],
                         ),
+                        SizedBox(height: 10,),
                         const Divider(
                           endIndent: 0.0,
                           indent: 0.0,
                           color: Color(0xFFE8E8E8),
                         ),
+                        SizedBox(height: 10,),
 
                         // Amount
                         Row(
                           children: [
                             Row(
                               children: [
-                                Container(
-                                  height: 35.0,
-                                  width: 35.0,
-                                  padding: const EdgeInsets.all(8.0),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(14.0),
-                                      color: const Color(0xffbebebe)
-                                  ),
-                                  child: Image.asset(
-                                    "assets/images/launcher_icon.png",
-                                  ),
-                                ),
+                                const Icon(Icons.money,size: 18,),
+
                                 const SizedBox(width: 10.0,),
 
                                 Text(

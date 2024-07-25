@@ -299,13 +299,13 @@ class LoginScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 30.0),
 
-                            const Center(
-                              child: Icon(
-                                Iconsax.finger_scan,
-                                color: Color(0XFF07B46B),
-                                size: 40,
-                              ),
-                            ),
+                            // const Center(
+                            //   child: Icon(
+                            //     Iconsax.finger_scan,
+                            //     color: Color(0XFF07B46B),
+                            //     size: 40,
+                            //   ),
+                            // ),
                           ],
                         ),
                       )

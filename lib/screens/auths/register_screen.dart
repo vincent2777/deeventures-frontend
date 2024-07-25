@@ -6,6 +6,7 @@ import 'package:iconsax/iconsax.dart';
 import '../../routes/app_routes/app_route_names.dart';
 import '../../utils/colors.dart';
 import 'controllers/register_state_controller.dart';
+import 'models/country.dart';
 
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({super.key});
@@ -78,13 +79,26 @@ class RegisterScreen extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              "First name",
-                              style: TextStyle(
-                                color: Colors.black.withOpacity(0.7),
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.w500
-                              ),
+                            Row(
+                              children: [
+                                Text(
+                                  "First name",
+                                  style: TextStyle(
+                                      color: Colors.black.withOpacity(0.7),
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.w500
+                                  ),
+                                ),
+                                const SizedBox(width: 2,),
+                                Text(
+                                  "*",
+                                  style: TextStyle(
+                                      color: Colors.redAccent.withOpacity(0.7),
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.w500
+                                  ),
+                                )
+                              ],
                             ),
                             const SizedBox(height: 5.0),
                             TextFormField(
@@ -136,13 +150,26 @@ class RegisterScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 15.0),
 
-                            Text(
-                              "Last name",
-                              style: TextStyle(
-                                color: Colors.black.withOpacity(0.7),
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.w500
-                              ),
+                            Row(
+                              children: [
+                                Text(
+                                  "Last name",
+                                  style: TextStyle(
+                                      color: Colors.black.withOpacity(0.7),
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.w500
+                                  ),
+                                ),
+                                const SizedBox(width: 2,),
+                                Text(
+                                  "*",
+                                  style: TextStyle(
+                                      color: Colors.redAccent.withOpacity(0.7),
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.w500
+                                  ),
+                                )
+                              ],
                             ),
                             const SizedBox(height: 5.0),
                             TextFormField(
@@ -194,13 +221,26 @@ class RegisterScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 15.0),
 
-                            Text(
-                              "Phone number",
-                              style: TextStyle(
-                                color: Colors.black.withOpacity(0.7),
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.w500
-                              ),
+                            Row(
+                              children: [
+                                Text(
+                                  "Phone Number",
+                                  style: TextStyle(
+                                      color: Colors.black.withOpacity(0.7),
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.w500
+                                  ),
+                                ),
+                                const SizedBox(width: 2,),
+                                Text(
+                                  "*",
+                                  style: TextStyle(
+                                      color: Colors.redAccent.withOpacity(0.7),
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.w500
+                                  ),
+                                )
+                              ],
                             ),
                             const SizedBox(height: 5.0),
                             TextFormField(
@@ -308,13 +348,26 @@ class RegisterScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 15.0),*/
 
-                            Text(
-                              "Email address",
-                              style: TextStyle(
-                                color: Colors.black.withOpacity(0.7),
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.w500
-                              ),
+                            Row(
+                              children: [
+                                Text(
+                                  "Email address",
+                                  style: TextStyle(
+                                      color: Colors.black.withOpacity(0.7),
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.w500
+                                  ),
+                                ),
+                                const SizedBox(width: 2,),
+                                Text(
+                                  "*",
+                                  style: TextStyle(
+                                      color: Colors.redAccent.withOpacity(0.7),
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.w500
+                                  ),
+                                )
+                              ],
                             ),
                             const SizedBox(height: 5.0),
                             TextFormField(
@@ -365,13 +418,26 @@ class RegisterScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 15.0),
 
-                            Text(
-                              "Password",
-                              style: TextStyle(
-                                  color: Colors.black.withOpacity(0.7),
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.w500
-                              ),
+                            Row(
+                              children: [
+                                Text(
+                                  "Password",
+                                  style: TextStyle(
+                                      color: Colors.black.withOpacity(0.7),
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.w500
+                                  ),
+                                ),
+                                const SizedBox(width: 2,),
+                                Text(
+                                  "*",
+                                  style: TextStyle(
+                                      color: Colors.redAccent.withOpacity(0.7),
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.w500
+                                  ),
+                                )
+                              ],
                             ),
                             const SizedBox(height: 5.0),
                             TextFormField(
@@ -429,23 +495,48 @@ class RegisterScreen extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 15.0),
-
-                            Text(
-                              "Country",
-                              style: TextStyle(
-                                  color: Colors.black.withOpacity(0.7),
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.w500
-                              ),
+                            Row(
+                              children: [
+                                Text(
+                                  "Country",
+                                  style: TextStyle(
+                                      color: Colors.black.withOpacity(0.7),
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.w500
+                                  ),
+                                ),
+                                const SizedBox(width: 2,),
+                                Text(
+                                  "*",
+                                  style: TextStyle(
+                                      color: Colors.redAccent.withOpacity(0.7),
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.w500
+                                  ),
+                                )
+                              ],
                             ),
                             const SizedBox(height: 5.0),
-                            TextFormField(
+
+                            DropdownButtonFormField<Country>(
                               onChanged: (value) {
-                                controller.setCountry(value);
+                                if (value != null && value.id != "Select Country") {
+                                  print("Selected country: ${value.name}");
+                                  controller.setCountry(value.name);
+                                }
                               },
-                              keyboardType: TextInputType.name,
-                              validator: ValidationBuilder().minLength(3).required().build(),
-                              autovalidateMode: controller.autoValidateMode,
+                              focusNode: FocusNode(),
+                              value: controller.placeholderCountry, // Set initial value here
+                              icon: const Icon(Icons.arrow_drop_down),
+                              items: controller.countryList.map((Country country) {
+                                return DropdownMenuItem<Country>(
+                                  value: country,
+                                  child: Text(
+                                    country.name,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                );
+                              }).toList(),
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8.0),
@@ -484,7 +575,14 @@ class RegisterScreen extends StatelessWidget {
                                   fontSize: 1.0,
                                 ),
                               ),
+                              validator: (value) {
+                                if (value == null || value.id == "Select Country") {
+                                  return 'Please select a country';
+                                }
+                                return null;
+                              },
                             ),
+
                             const SizedBox(height: 15.0),
 
                             Row(
@@ -559,19 +657,26 @@ class RegisterScreen extends StatelessWidget {
                             RichText(
                               text: TextSpan(children: [
                                 TextSpan(
-                                  text: "By clicking the Register button below, you agree to Deeventures Exchange ",
+                                  text: "By clicking the Register button below, you agree to Deeventures ",
                                   style: TextStyle(
                                     color: Colors.grey[600],
                                     fontSize: 14.0,
                                   ),
                                 ),
-                                const TextSpan(
-                                  text: "Privacy Policy",
-                                  style: TextStyle(
+                                TextSpan(
+                                  text: "Terms of Service",
+                                  style: const TextStyle(
                                     color: Color(0XFF07B46B),
                                     fontSize: 14.0,
                                     fontWeight: FontWeight.w500,
                                   ),
+                                  recognizer: controller.tapRecognizer
+                                    ..onTap = () {
+                                      Get.toNamed(
+                                        '$webViewScreen?pageLink=https://deeventures.com.ng/terms.html&pageTitle=Terms and Conditions',
+                                      );
+                                    },
+
                                 )
                               ]),
                               textAlign: TextAlign.center,

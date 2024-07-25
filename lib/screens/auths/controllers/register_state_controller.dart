@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -6,6 +7,7 @@ import '../../../general/widgets/app_toast_widget.dart';
 import '../../../routes/api_routes/api_route_names.dart';
 import '../../../routes/app_routes/app_route_names.dart';
 import '../apis/auth_api.dart';
+import '../models/country.dart';
 
 class RegisterStateController extends GetxController {
 
@@ -22,11 +24,26 @@ class RegisterStateController extends GetxController {
   bool _isLoading = false;
   AutovalidateMode _autoValidateMode = AutovalidateMode.disabled;
   final AppToastWidget _appToastWidget = AppToastWidget();
+  final Country placeholderCountry = Country(id: "Select Country", name: "Select Country");
+
+  final List<Country> _countryList = [
+    Country(id: "Select Country", name: "Select Country"),
+    Country(id: "Nigeria", name: "Nigeria"),
+    Country(id: "United States of America", name: "United States of America"),
+    Country(id: "United Kingdom", name: "United Kingdom"),
+    Country(id: "Ghana", name: "Ghana"),
+    Country(id: "Kenya", name: "Kenya"),
+    Country(id: "Others", name: "Others"),
+  ];
+  final TapGestureRecognizer _tapRecognizer = TapGestureRecognizer();
 
 
   /*
   * GETTERS
   * */
+  List<Country> get countryList => _countryList;
+  TapGestureRecognizer get tapRecognizer => _tapRecognizer;
+
   String get firstName => _firstName;
   String get lastName => _lastName;
   String get phoneNumber => _phoneNumber;
@@ -123,7 +140,9 @@ class RegisterStateController extends GetxController {
       debugPrint("USER DATA:::: $userData");
 
       setUser(userFromJson(userData));
-      Get.offAndToNamed(loginScreen);
+    _appToastWidget.notification("Welcome to Deeventures!", "Your Registration was successful. Start Trading now!", "Success");
+
+    Get.offAndToNamed(loginScreen);
     } else {
       setIsLoading(false);
       String errorMessage = response.data["message"];
