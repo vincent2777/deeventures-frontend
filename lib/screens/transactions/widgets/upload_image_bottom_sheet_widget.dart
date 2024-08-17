@@ -82,8 +82,8 @@ class UploadImageBottomSheetWidget {
                                   borderRadius: BorderRadius.circular(7.0),
                                   color: mainGreen,
                                 ),
-                                child: Row(
-                                  children: const [
+                                child: const Row(
+                                  children: [
                                     Icon(
                                       Iconsax.camera,
                                       color: Colors.white,
@@ -224,8 +224,8 @@ class UploadImageBottomSheetWidget {
                                 borderRadius: BorderRadius.circular(7.0),
                                 color: mainGreen,
                               ),
-                              child: Row(
-                                children: const [
+                              child: const Row(
+                                children: [
                                   Icon(
                                     Iconsax.camera,
                                     color: Colors.white,

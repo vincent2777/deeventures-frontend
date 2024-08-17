@@ -2,8 +2,8 @@
 * Base URL
 */
 // const String baseURL = "http://10.0.2.2:5000/api/v1"; //  Emulator
-// const String baseURL = "http://192.168.0.35:5000/api/v1"; // Development
-const String baseURL = "https://www.damezgroup.com/deeventure-apis/api/v1"; //"http://192.168.1.168:9000/api/v1"; // Development
+const String baseURL = "http://192.168.0.31:5000/api/v1"; // Development
+// const String baseURL = "https://www.damezgroup.com/deeventure-apis/api/v1";
 const String imgBaseUrlProd = "https://app.deeventures.com.ng/";  // Production
 const String imgBaseUrlDev = "http://192.168.1.168/deeventures/";  // development
 
@@ -13,7 +13,10 @@ const String imgBaseUrlDev = "http://192.168.1.168/deeventures/";  // developmen
 */
 const String loginUserRoute = "/users/login";
 const String registerUserRoute = "/users/signup";
+const String forgotPasswordRoute = "/users/forgot_password";
+const String resetPasswordRoute = "/users/reset_password";
 const String updatePasswordRoute = "/users/update_password";
+const String uploadProfileImageRoute = "/users/upload_profile_image";
 
 /*
 * Users API Routes.
@@ -30,6 +33,7 @@ const String getUserWalletRoute = "/wallets/user_wallet";
 const String getUserReferralWalletRoute = "/wallets/user_referral_wallet";
 const String depositMoneyRoute = "/wallets/deposit_money";
 const String withdrawMoneyRoute = "/wallets/withdraw_money";
+const String verifyWithdrawMoneyRoute = "/wallets/verify_withdraw_money";
 
 /*
 * Cryptocurrency API Routes.

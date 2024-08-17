@@ -33,8 +33,10 @@ class HomeScreen extends StatelessWidget {
           extendBodyBehindAppBar: true,
           body: screens[controller.selectedBottomBarIndex],
           drawer: AppDrawer(),
+
           bottomNavigationBar: AppBottomNavigationBar(controller),
-          floatingActionButton: FloatingActionButton(
+
+          /*floatingActionButton: FloatingActionButton(
             onPressed: () {},
             backgroundColor: Colors.green,
             shape: const CircleBorder(),
@@ -43,8 +45,8 @@ class HomeScreen extends StatelessWidget {
               color: Colors.white,
               size: 26.0,
             ),
-          ),
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          ),*/
+          // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         );
       }),
     );

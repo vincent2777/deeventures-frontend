@@ -5,6 +5,7 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../routes/app_routes/app_route_names.dart';
 import '../../utils/colors.dart';
+import '../setting/controllers/setting_state_controller.dart';
 import 'controllers/register_state_controller.dart';
 import 'models/country.dart';
 
@@ -12,6 +13,7 @@ class RegisterScreen extends StatelessWidget {
   RegisterScreen({super.key});
 
   final RegisterStateController registerStateController = Get.put(RegisterStateController());
+  final SettingStateController settingStateController = Get.put(SettingStateController());
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -521,7 +523,7 @@ class RegisterScreen extends StatelessWidget {
                             DropdownButtonFormField<Country>(
                               onChanged: (value) {
                                 if (value != null && value.id != "Select Country") {
-                                  print("Selected country: ${value.name}");
+                                  debugPrint("Selected country: ${value.name}");
                                   controller.setCountry(value.name);
                                 }
                               },

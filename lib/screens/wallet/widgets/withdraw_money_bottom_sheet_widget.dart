@@ -23,7 +23,7 @@ class WithdrawMoneyBottomSheetWidget {
       isDismissible: false,
       isScrollControlled: true,
       GetBuilder<WalletStateController>(builder: (controller) {
-        return (!controller.showWithdrawalDetails) ? (
+        return (controller.bottomSheetStep == 1) ? (
             ConstrainedBox(
                 constraints: BoxConstraints(
                     maxHeight: Get.height / 1.4
@@ -45,6 +45,7 @@ class WithdrawMoneyBottomSheetWidget {
                           alignment: Alignment.centerRight,
                           child: IconButton(
                             onPressed: () {
+                              controller.setBottomSheetStep(0);
                               Get.back();
                             },
                             icon: const Icon(
@@ -316,8 +317,7 @@ class WithdrawMoneyBottomSheetWidget {
                                       TextButton(
                                         onPressed: () {
                                           (formKey.currentState!.validate()) ? (
-                                              // controller.sellCrypto()
-                                              controller.setShowWithdrawalDetails(true)
+                                              controller.setBottomSheetStep(2)
                                           ) : ({
                                             controller.setAutoValidateMode(),
                                             controller.appToastWidget.notification("Note!", "Please fill all the required fields.", 'Warning'),
@@ -353,8 +353,7 @@ class WithdrawMoneyBottomSheetWidget {
                                     ],
                                   ),
                                 );
-                              }
-                              )
+                              })
                             ],
                           ),
                         ),
@@ -363,7 +362,7 @@ class WithdrawMoneyBottomSheetWidget {
                   ),
                 )
             )
-        ) : (
+        ) : (controller.bottomSheetStep == 2) ? (
             ConstrainedBox(
                 constraints: BoxConstraints(
                     maxHeight: Get.height / 1.8
@@ -385,7 +384,7 @@ class WithdrawMoneyBottomSheetWidget {
                             alignment: Alignment.centerRight,
                             child: IconButton(
                               onPressed: () {
-                                controller.setShowWithdrawalDetails(false);
+                                controller.setBottomSheetStep(0);
                                 Get.back();
                               },
                               icon: const Icon(
@@ -436,14 +435,14 @@ class WithdrawMoneyBottomSheetWidget {
                             )
                           ],
                         ),
-                        SizedBox(height: 10,),
+                        const SizedBox(height: 10,),
 
                         const Divider(
                           endIndent: 0.0,
                           indent: 0.0,
                           color: Color(0xFFE8E8E8),
                         ),
-                        SizedBox(height: 10,),
+                        const SizedBox(height: 10,),
 
                         // Account Name
                         Row(
@@ -476,14 +475,14 @@ class WithdrawMoneyBottomSheetWidget {
                             )
                           ],
                         ),
-                        SizedBox(height: 10,),
+                        const SizedBox(height: 10,),
 
                         const Divider(
                           endIndent: 0.0,
                           indent: 0.0,
                           color: Color(0xFFE8E8E8),
                         ),
-                        SizedBox(height: 10,),
+                        const SizedBox(height: 10,),
 
                         // Bank Name
                         Row(
@@ -516,13 +515,13 @@ class WithdrawMoneyBottomSheetWidget {
                             )
                           ],
                         ),
-                        SizedBox(height: 10,),
+                        const SizedBox(height: 10,),
                         const Divider(
                           endIndent: 0.0,
                           indent: 0.0,
                           color: Color(0xFFE8E8E8),
                         ),
-                        SizedBox(height: 10,),
+                        const SizedBox(height: 10,),
 
                         // Amount
                         Row(
@@ -566,7 +565,6 @@ class WithdrawMoneyBottomSheetWidget {
                         //  Submit Button.
                         TextButton(
                           onPressed: () {
-                            // Get.back();
                             controller.withdrawMoney();
                           },
                           style: TextButton.styleFrom(
@@ -597,6 +595,159 @@ class WithdrawMoneyBottomSheetWidget {
                     ),
                   ),
                 )
+            )
+        ) : (
+            ConstrainedBox(
+              constraints: BoxConstraints(
+                  maxHeight: Get.height / 1.8
+              ),
+              child: Container(
+                height: Get.height,
+                width: Get.width,
+                padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 25.0),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(30.0), topRight: Radius.circular(30.0)),
+                  color: Colors.white,
+                ),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 10.0),
+
+                    //  Close Button.
+                    Align(
+                        alignment: Alignment.centerRight,
+                        child: IconButton(
+                          onPressed: () {
+                            controller.setBottomSheetStep(0);
+                            Get.back();
+                          },
+                          icon: const Icon(
+                            Icons.close,
+                            size: 30.0,
+                          ),
+                        )
+                    ),
+
+                    Text(
+                      "Confirm OTP",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.grey.shade700,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    const SizedBox(height: 30.0,),
+
+                    GetBuilder<WalletStateController>(builder: (controller) {
+                      return Form(
+                        key: formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // OTP
+                            Text(
+                              "OTP",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.grey.shade800,
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            const SizedBox(height: 10.0,),
+                            TextFormField(
+                              onChanged: (value) {
+                                controller.setOTP(value);
+                              },
+                              keyboardType: TextInputType.number,
+                              validator: ValidationBuilder().required().build(),
+                              autovalidateMode: controller.autoValidateMode,
+                              decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  borderSide: BorderSide(
+                                    color: Colors.grey.shade300,
+                                    width: 1,
+                                  ),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  borderSide: const BorderSide(
+                                    color: Color(0xFFFF9191),
+                                    width: 1,
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  borderSide: const BorderSide(
+                                    color: Color(0XFF07B46B),
+                                    width: 2.0,
+                                  ),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                  borderSide: const BorderSide(
+                                    color: Color(0xFFFF9191),
+                                    width: 2.0,
+                                  ),
+                                ),
+                                contentPadding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 0.0),
+                                filled: true,
+                                fillColor: Colors.white,
+                                hintText: "OTP",
+                                hintStyle: TextStyle(
+                                  color: Colors.grey.shade400,
+                                  fontSize: 14.0,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 30.0),
+
+                            //  Submit Button.
+                            TextButton(
+                              onPressed: () {
+                                (formKey.currentState!.validate()) ? (
+                                    controller.verifyWithdrawMoney()
+                                ) : ({
+                                  controller.setAutoValidateMode(),
+                                  controller.appToastWidget.notification("Note!", "Please fill all the required fields.", 'Warning'),
+                                });
+                              },
+                              style: TextButton.styleFrom(
+                                padding: EdgeInsets.zero,
+                              ),
+                              child: Container(
+                                height: 50.0,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(7.0),
+                                  color: mainGreen,
+                                ),
+                                child: (!controller.isLoading) ?
+                                const Text(
+                                  "Submit",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w600
+                                  ),
+                                ) :
+                                const SpinKitCircle(
+                                  color: Colors.white,
+                                  size: 40,
+                                ),
+                              ),
+                            ),
+
+                            const SizedBox(height: 50,)
+                          ],
+                        ),
+                      );
+                    })
+                  ],
+                ),
+              ),
             )
         );
       }

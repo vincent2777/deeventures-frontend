@@ -137,7 +137,7 @@ class RegisterStateController extends GetxController {
       setIsLoading(false);
 
       Map<String, dynamic> userData = response.data["data"];
-      debugPrint("USER DATA:::: $userData");
+      // debugPrint("USER DATA:::: $userData");
 
       setUser(userFromJson(userData));
     _appToastWidget.notification("Welcome to Deeventures!", "Your Registration was successful. Start Trading now!", "Success");

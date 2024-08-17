@@ -13,7 +13,7 @@ class GiftCardAPI {
   //  Get Gift Cards.
   static Future<Response?> getGiftCardsService(String url, String token) async {
     var fullURL = "$baseURL$url";
-    debugPrint("URL::: $fullURL");
+    // debugPrint("URL::: $fullURL");
 
     try {
       return await Dio().get(
@@ -41,7 +41,7 @@ class GiftCardAPI {
       List<ValueRow> rows) async {
 
     var fullURL = "$baseURL$sellGiftCardRoute";
-    debugPrint("URL::: $fullURL");
+    // debugPrint("URL::: $fullURL");
 
     FormData formData = FormData();
 
@@ -103,7 +103,7 @@ class GiftCardAPI {
   //  Get Gift Card Rates.
   static Future<Response?> getGiftCardRatesService(String url, String token, String giftCardId) async {
     var fullURL = "$baseURL$url/$giftCardId";
-    debugPrint("URL::: $fullURL");
+    // debugPrint("URL::: $fullURL");
 
     try {
       return await Dio().get(

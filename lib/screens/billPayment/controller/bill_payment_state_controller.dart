@@ -269,7 +269,7 @@ class BillPaymentStateController extends GetxController {
       "airtimeAmount": _amount,
     };
 
-    debugPrint("AIRTIME::: $buyAirtimeData");
+    // debugPrint("AIRTIME::: $buyAirtimeData");
     var response = await BillPaymentAPI.buyAirtimeService(buyAirtimeRoute, buyAirtimeData, decodedToken);
     bool isSuccess = response!.data["success"];
     String successMessage = response.data["message"];
@@ -331,7 +331,7 @@ class BillPaymentStateController extends GetxController {
 
     var response = await BillPaymentAPI.validateMeterNo(validateMeterNoRoute, validateMeterNoBody, decodedToken);
     bool isSuccess = response!.data["success"];
-    debugPrint("RESPONSE ::: $isSuccess");
+    // debugPrint("RESPONSE ::: $isSuccess");
 
     if (isSuccess) {
       setIsLoading(false);
@@ -339,7 +339,7 @@ class BillPaymentStateController extends GetxController {
       if(response.data["data"]["validatedData"] != null){
         String meterOwner = response.data["data"]["validatedData"]["customer_name"];
         setMeterOwnerName(meterOwner);
-        debugPrint("meterOwner::: $meterOwner");
+        // debugPrint("meterOwner::: $meterOwner");
       }
     } else {
       setIsLoading(false);
@@ -383,11 +383,11 @@ class BillPaymentStateController extends GetxController {
       "totalAmt": _totalPrice
     };
 
-    debugPrint("INTERNET::: $buyInternetData");
+    // debugPrint("INTERNET::: $buyInternetData");
     var response = await BillPaymentAPI.buyInternetService(buyInternetRoute, buyInternetData, decodedToken);
     bool isSuccess = response!.data["success"];
     String successMessage = response.data["message"];
-    debugPrint("ELECTRIC COMPANIES::: $response");
+    // debugPrint("ELECTRIC COMPANIES::: $response");
 
     if (isSuccess) {
       setIsLoading(false);
@@ -443,7 +443,7 @@ class BillPaymentStateController extends GetxController {
     if (isSuccess) {
       setIsLoading(false);
 
-      debugPrint("METER TYPES::: ${response.data["data"]}");
+      // debugPrint("METER TYPES::: ${response.data["data"]}");
       List<dynamic> meterTypeData = response.data["data"]["meterTypes"] ?? [];
       List<MeterType> meterTypes = meterTypeData.map((eachMeterTypes) => MeterType.fromJson(eachMeterTypes)).toList();
       setMeterTypes(meterTypes);
@@ -489,10 +489,10 @@ class BillPaymentStateController extends GetxController {
       "mobileNumber": _phoneNumber,
     };
 
-    debugPrint("ELECTRIC buyElectricityData::: $buyElectricityData");
+    // debugPrint("ELECTRIC buyElectricityData::: $buyElectricityData");
     var response = await BillPaymentAPI.buyElectricityService(buyElectricityRoute, buyElectricityData, decodedToken);
     bool isSuccess = response!.data["success"];
-    debugPrint("ELECTRIC buyElectricityData::: $response");
+    // debugPrint("ELECTRIC buyElectricityData::: $response");
 
     if (isSuccess) {
       setIsLoading(false);
@@ -568,7 +568,7 @@ class BillPaymentStateController extends GetxController {
       "mobileNumber": _phoneNumber
     };
 
-    debugPrint("CABLE TV DATA::: $buyCableTVData");
+    // debugPrint("CABLE TV DATA::: $buyCableTVData");
     var response = await BillPaymentAPI.buyCableTVService(buyCableTVRoute, buyCableTVData, decodedToken);
     bool isSuccess = response!.data["success"];
 
@@ -590,7 +590,7 @@ class BillPaymentStateController extends GetxController {
     String? token = await _flutterSecureStorage.read(key: "token");
     String decodedToken = jsonDecode(token!);
 
-    debugPrint("BETTING Betting Company");
+    // debugPrint("BETTING Betting Company");
   }
   Future<void> buyBettingSubscription() async {
     setIsLoading(true);

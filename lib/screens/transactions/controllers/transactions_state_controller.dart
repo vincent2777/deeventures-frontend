@@ -21,7 +21,7 @@ class TransactionsStateController extends GetxController with GetSingleTickerPro
   String _transactionType = "";
   String _transactionStatus = "";
   final int _pageSize = 20;
-  File? _pickedFile;
+  List<File?> _pickedFiles = [];
   final ImagePicker _imagePicker = ImagePicker();
   bool _isLoading = false;
   Transaction _transaction = Transaction();
@@ -31,6 +31,7 @@ class TransactionsStateController extends GetxController with GetSingleTickerPro
     TransactionType(label: "Coin Sell", value: "coin_sell"),
     TransactionType(label: "Gift Card Sell", value: "gift_card_sell"),
     TransactionType(label: "Bill Payment", value: "bill_payment"),
+    TransactionType(label: "Fund Withdrawal", value: "fund_withdrawal"),
     TransactionType(label: "Wallet Funding", value: "wallet_funding"),
   ];
   late final TabController _tabController;
@@ -43,7 +44,7 @@ class TransactionsStateController extends GetxController with GetSingleTickerPro
   /*
   * GETTERS
   * */
-  File? get pickedFile => _pickedFile;
+  List<File?> get pickedFiles => _pickedFiles;
   bool get isLoading => _isLoading;
   Transaction get transaction => _transaction;
   List<Transaction> get transactions => _transactions;
@@ -56,8 +57,8 @@ class TransactionsStateController extends GetxController with GetSingleTickerPro
   /*
   * SETTERS
   * */
-  void setPickedFile(File value) {
-    _pickedFile = value;
+  void setPickedFiles(List<File> value) {
+    _pickedFiles = value;
     update();
   }
   void setIsLoading(bool value) {
@@ -154,16 +155,15 @@ class TransactionsStateController extends GetxController with GetSingleTickerPro
   //  Pick an Image.
   Future<void> takeImage(ImageSource imageSource) async {
     try {
-      final XFile? pickedImage = await _imagePicker.pickImage(
-        source: imageSource,
+      final List<XFile?> pickedImages = await _imagePicker.pickMultiImage(
         imageQuality: 80,
       );
-      if (pickedImage != null) {
+      if (pickedImages.isNotEmpty) {
         // Note: The "pickedImage" is type "XFile" and need to be made type "File" as did below.
-        File filePath = File(pickedImage.path);
-        debugPrint("FILE PATH::: $filePath");
+        List<File> files = pickedImages.map((pickedImage) => File(pickedImage!.path)).toList();
+        // debugPrint("FILE PATH::: $filePath");
         ImagePreviewBottomSheetWidget.imagePreviewBottomSheetWidget();
-        return setPickedFile(filePath);
+        return setPickedFiles(files);
       }
       return _appToastWidget.notification("Oooops!", "No image selected.", "Error");
     } on PlatformException catch (e) {
@@ -173,31 +173,32 @@ class TransactionsStateController extends GetxController with GetSingleTickerPro
 
   // Upload Transaction Proof
   Future<void> uploadTransactionProof() async {
-    setIsLoading(true);
+    if(pickedFiles.isNotEmpty) {
+      setIsLoading(true);
 
-    String? token = await _flutterSecureStorage.read(key: "token") ?? "";
-    String decodedToken = jsonDecode(token);
+      String? token = await _flutterSecureStorage.read(key: "token") ?? "";
+      String decodedToken = jsonDecode(token);
 
-    String imageFile = _pickedFile!.path;
-    String trnxReference = _transaction.trnxReference!;
+      String trnxReference = _transaction.trnxReference!;
 
-    debugPrint("PROGRESS:::: $trnxReference");
-    debugPrint("FILE:::: $imageFile");
-    var response = await TransactionAPI.uploadTransactionProofService(uploadTransactionProofRoute, trnxReference, imageFile ,decodedToken);
-    bool isSuccess = response!.data["success"];
-    debugPrint("PROGRESS:::: $response");
+      var response = await TransactionAPI.uploadTransactionProofService(uploadTransactionProofRoute, trnxReference, pickedFiles ,decodedToken);
+      bool isSuccess = response!.data["success"];
+      // debugPrint("PROGRESS:::: $response");
 
-    if (isSuccess) {
-      setIsLoading(false);
+      if (isSuccess) {
+        setIsLoading(false);
 
-      String successMessage = response.data["message"];
-      Get.back();
-      getTransactions(0);
-      _appToastWidget.notification("Congratulation!", successMessage, "Success");
-    } else {
-      setIsLoading(false);
-      String errorMessage = response.data["message"];
-      _appToastWidget.notification("Oooops!!!", errorMessage, "Error");
+        String successMessage = response.data["message"];
+        Get.back();
+        getTransactions(0);
+        _appToastWidget.notification("Congratulation!", successMessage, "Success");
+      } else {
+        setIsLoading(false);
+        String errorMessage = response.data["message"];
+        _appToastWidget.notification("Oooops!!!", errorMessage, "Error");
+      }
+    } else{
+      _appToastWidget.notification("Oooops!", "Select at least one card image", "Error");
     }
   }
 

@@ -75,8 +75,7 @@ class TradeGiftCardScreen2 extends StatelessWidget {
                                       DropdownButtonFormField<GiftCardRate>(
                                         onChanged: (value) {
                                           if (value != null) {
-                                            controller
-                                                .setSelectedGiftCardRate(value);
+                                            controller.setSelectedGiftCardRate(value);
                                           }
                                         },
                                         focusNode: FocusNode(),
@@ -224,7 +223,7 @@ class TradeGiftCardScreen2 extends StatelessWidget {
                                               ),
                                               // Button and input section
                                               SizedBox(
-                                                width: MediaQuery.of(context).size.width * 0.32, // 40% of the screen width
+                                                width: MediaQuery.of(context).size.width * 0.34, // 40% of the screen width
                                                 child: Row(
                                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                   children: [

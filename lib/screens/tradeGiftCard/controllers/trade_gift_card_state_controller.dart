@@ -224,7 +224,7 @@ class TradeGiftCardStateController extends GetxController {
     if (isSuccess) {
       setIsLoading(false);
       List<dynamic> giftCardData = response.data["data"]["giftCards"];
-      debugPrint("RESPONSE DATA::: $giftCardData");
+      // debugPrint("RESPONSE DATA::: $giftCardData");
       
       List<GiftCard> giftCards = giftCardData.map((eachGiftCard) => GiftCard.fromJson(eachGiftCard)).toList();
       setGiftCards(giftCards);
@@ -247,7 +247,7 @@ class TradeGiftCardStateController extends GetxController {
     if (isSuccess) {
       setIsLoading(false);
       List<dynamic> giftCardRatesData = response.data["data"]["giftCardRates"];
-      debugPrint("RESPONSE DATA::: $giftCardRatesData");
+      // debugPrint("RESPONSE DATA::: $giftCardRatesData");
 
       List<GiftCardRate> rates = giftCardRatesData.map((eachGiftCardRate) => GiftCardRate.fromJson(eachGiftCardRate)).toList();
       setGiftCardRates(rates);
@@ -260,7 +260,7 @@ class TradeGiftCardStateController extends GetxController {
 
   Future<void> sellGiftCard() async {
 
-    if(pickedFile != null && pickedFile.isNotEmpty) {
+    if(pickedFile.isNotEmpty) {
       setIsLoading(true);
 
       String userData = await _flutterSecureStorage.read(key: "userData") ?? "";
@@ -268,7 +268,7 @@ class TradeGiftCardStateController extends GetxController {
 
       String? token = await _flutterSecureStorage.read(key: "token") ?? "";
       String decodedToken = jsonDecode(token);
-      debugPrint("TOKEN::: $decodedToken");
+      // debugPrint("TOKEN::: $decodedToken");
 
       var calc = calculateTotalValue(rows);
 
@@ -288,13 +288,12 @@ class TradeGiftCardStateController extends GetxController {
         "currency": "NGN",
       };
 
-      debugPrint("sellGiftCardData::: $sellGiftCardData");
+      // debugPrint("sellGiftCardData::: $sellGiftCardData");
 
 
-      var response = await GiftCardAPI.sellGiftCardService(
-          sellGiftCardRoute, sellGiftCardData, decodedToken, pickedFile,rows);
+      var response = await GiftCardAPI.sellGiftCardService(sellGiftCardRoute, sellGiftCardData, decodedToken, pickedFile,rows);
       bool isSuccess = response!.data["success"];
-      debugPrint("RESPONSE::: $response");
+      // debugPrint("RESPONSE::: $response");
 
       if (isSuccess) {
         setIsLoading(false);
@@ -303,7 +302,7 @@ class TradeGiftCardStateController extends GetxController {
         Transaction transactionData = transactionFromJson(transactionResponse);
         setTransaction(transactionData);
         _transactionsStateController.setTransaction(transactionData);
-        debugPrint("PROGRESS:::: $response");
+        // debugPrint("PROGRESS:::: $response");
         // setShowCardProofModal(true);
         resetState();
         Get.toNamed("/homeScreen");
@@ -330,7 +329,7 @@ class TradeGiftCardStateController extends GetxController {
       if (pickedImages.isNotEmpty) {
         List<File> files = pickedImages.map((image) => File(image.path)).toList();
 
-        debugPrint("FILES PATHS::: ${files.map((file) => file.path).join(", ")}");
+        // debugPrint("FILES PATHS::: ${files.map((file) => file.path).join(", ")}");
 
         // Assuming you have a method to handle the list of picked files
         ImagePreviewBottomSheetWidget.imagePreviewCardBottomSheetWidget();

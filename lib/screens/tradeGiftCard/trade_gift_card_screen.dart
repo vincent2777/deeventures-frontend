@@ -4,6 +4,7 @@ import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../routes/app_routes/app_route_names.dart';
 import 'controllers/trade_gift_card_state_controller.dart';
 
 class TradeGiftCardScreen extends StatelessWidget {
@@ -122,7 +123,7 @@ class TradeGiftCardScreen extends StatelessWidget {
                                 onTap: () {
                                   controller.setSelectedGiftCard(controller.giftCards[index]);
                                   controller.getGiftCardRates();
-                                  Get.toNamed("/tradeGiftCardScreen2");
+                                  Get.toNamed(tradeGiftCardScreen2);
                                 },
                                 child: Container(
                                   margin: const EdgeInsets.only(bottom: 12.0),

@@ -77,7 +77,31 @@ class WalletAPI {
 
   // Withdraw Money
   static Future<Response?> withdrawMoneyService(String url, int userID, Map<String, dynamic> withdrawData, String token) async {
-    var fullURL = "$baseURL$url";
+    var fullURL = "$baseURL$url/$userID";
+    debugPrint("URL::: $fullURL");
+
+    try {
+      return await Dio().post(
+        fullURL,
+        data: withdrawData,
+        options: Options(headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        }),
+      );
+    } on DioException catch (e) {
+      debugPrint("ERROR RESPONSE::: $e");
+      if (e.response != null) {
+        return e.response;
+      }
+      throw Exception(e.response);
+    }
+  }
+
+  // Verify Withdraw Money
+  static Future<Response?> verifyWithdrawMoneyService(String url, int userID, Map<String, dynamic> withdrawData, String token) async {
+    var fullURL = "$baseURL$url/$userID";
     debugPrint("URL::: $fullURL");
 
     try {

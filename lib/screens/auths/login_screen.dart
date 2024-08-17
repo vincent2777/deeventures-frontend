@@ -1,3 +1,4 @@
+import 'package:deeventures/screens/auths/widgets/forgot_password_bottom_sheet_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:form_validator/form_validator.dart';
@@ -140,7 +141,7 @@ class LoginScreen extends StatelessWidget {
                                 hintText: "example@email.com",
                                 hintStyle: const TextStyle(
                                   color: Colors.black26,
-                                  fontSize: 1.0,
+                                  fontSize: 16.0,
                                 ),
                               ),
                             ),
@@ -196,10 +197,10 @@ class LoginScreen extends StatelessWidget {
                                 contentPadding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 0.0),
                                 filled: true,
                                 fillColor: Colors.white,
-                                hintText: "example@email.com",
+                                hintText: "Password",
                                 hintStyle: const TextStyle(
                                   color: Colors.black26,
-                                  fontSize: 1.0,
+                                  fontSize: 16.0,
                                 ),
                                 suffixIcon: IconButton(
                                   onPressed: () { controller.setHidePassword(); },
@@ -216,7 +217,9 @@ class LoginScreen extends StatelessWidget {
                             Align(
                               alignment: Alignment.centerRight,
                               child: InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  ForgotPasswordBottomSheetWidget.forgotPasswordBottomSheetWidget();
+                                },
                                 child: const Text(
                                   "Forgot password?",
                                   style: TextStyle(

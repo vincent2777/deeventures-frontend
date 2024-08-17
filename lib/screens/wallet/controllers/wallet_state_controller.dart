@@ -18,12 +18,13 @@ class WalletStateController extends GetxController {
   String _accountNumber = "";
   String _accountName = "";
   String _bankName = "";
+  String _otp = "";
   String _withdrawalChannel = "main_wallet";
   Wallet _wallet = Wallet(currencySymbol: "", amount: 0.0);
   Wallet _referralWallet = Wallet(currencySymbol: "", amount: 0.0);
   bool _showWalletBalance = true;
   bool _showReferralWalletBalance = true;
-  bool _showWithdrawalDetails = false;
+  int _bottomSheetStep = 1;
   bool _showDepositDetails = false;
   AccountSettings _accountSettings = AccountSettings();
   bool _isLoading = false;
@@ -41,12 +42,13 @@ class WalletStateController extends GetxController {
   String get accountNumber => _accountNumber;
   String get accountName => _accountName;
   String get bankName => _bankName;
+  String get otp => _otp;
   Wallet get wallet => _wallet;
   String get withdrawalChannel => _withdrawalChannel;
   Wallet get referralWallet => _referralWallet;
   bool get showWalletBalance => _showWalletBalance;
   bool get showReferralWalletBalance => _showReferralWalletBalance;
-  bool get showWithdrawalDetails => _showWithdrawalDetails;
+  int get bottomSheetStep => _bottomSheetStep;
   bool get showDepositDetails => _showDepositDetails;
   AccountSettings get accountSettings => _accountSettings;
   AutovalidateMode get autoValidateMode => _autoValidateMode;
@@ -77,6 +79,10 @@ class WalletStateController extends GetxController {
     _bankName = value;
     update();
   }
+  void setOTP(String value) {
+    _otp = value;
+    update();
+  }
   void setWallet(Wallet value) {
     _wallet = value;
     update();
@@ -93,8 +99,8 @@ class WalletStateController extends GetxController {
     _showReferralWalletBalance = !_showReferralWalletBalance;
     update();
   }
-  void setShowWithdrawalDetails(bool value) {
-    _showWithdrawalDetails = value;
+  void setBottomSheetStep(int value) {
+    _bottomSheetStep = value;
     update();
   }
   void setShowDepositDetails(bool value) {
@@ -132,7 +138,7 @@ class WalletStateController extends GetxController {
     String decodedToken = jsonDecode(token!);
     int userID = decodedLoggedInUser["id"];
 
-    print("decodedLoggedInUser $decodedLoggedInUser");
+    // debugPrint("decodedLoggedInUser $decodedLoggedInUser");
 
     var response = await WalletAPI.getUserWalletService(getUserWalletRoute, userID, decodedToken);
     bool isSuccess = response!.data["success"];
@@ -193,7 +199,7 @@ class WalletStateController extends GetxController {
     String userData = await _flutterSecureStorage.read(key: "userData") ?? "";
     Map<String, dynamic> decodedLoggedInUser = jsonDecode(userData);
 
-    print("oboyyyyy");
+    // debugPrint("oboyyyyy");
 
     String? token = await _flutterSecureStorage.read(key: "token");
     String decodedToken = jsonDecode(token!);
@@ -206,7 +212,7 @@ class WalletStateController extends GetxController {
     var response = await WalletAPI.depositMoneyService(depositMoneyRoute, userID, depositData, decodedToken);
     bool isSuccess = response!.data["success"];
     String message = response.data["message"];
-    debugPrint("USER DATA:::: ${response.data["data"]}");
+    // debugPrint("USER DATA:::: ${response.data["data"]}");
 
     if (isSuccess) {
       setIsLoading(false);
@@ -223,7 +229,7 @@ class WalletStateController extends GetxController {
       setShowDepositDetails(true);
       _appToastWidget.notification("Congratulations!", message, "Success");
 
-      debugPrint("SETTINGS DATA:::: $settingsData");
+      // debugPrint("SETTINGS DATA:::: $settingsData");
     } else {
       setIsLoading(false);
       String errorMessage = response.data["message"];
@@ -242,34 +248,64 @@ class WalletStateController extends GetxController {
 
     Map<String, dynamic> withdrawData = {
       "amount": _amount,
-      "user_id":userID,
-      "wchannel": withdrawalChannel,
-      "account_number": accountNumber,
-      "account_name": accountName,
-      "bank_name": bankName,
     };
 
     var response = await WalletAPI.withdrawMoneyService(withdrawMoneyRoute, userID, withdrawData, decodedToken);
     bool isSuccess = response!.data["success"];
     String message = response.data["message"];
-    debugPrint("USER DATA:::: ${response.data["data"]}");
+    // debugPrint("USER DATA:::: ${response.data["data"]}");
 
     if (isSuccess) {
       setIsLoading(false);
 
-      if (response.data["data"] == null) {
-        _appToastWidget.notification("Note!", message, "Warning");
-      }
+      setBottomSheetStep(3);
+      _appToastWidget.notification("Success!", message, "Success");
+      // debugPrint("transactionData DATA:::: $transactionData");
+    } else {
+      setIsLoading(false);
+      String errorMessage = response.data["message"];
+      _appToastWidget.notification("Oooops!", errorMessage, "Error");
+    }
+  }
+
+  Future<void> verifyWithdrawMoney() async {
+    setIsLoading(true);
+    String userData = await _flutterSecureStorage.read(key: "userData") ?? "";
+    Map<String, dynamic> decodedLoggedInUser = jsonDecode(userData);
+
+    String? token = await _flutterSecureStorage.read(key: "token");
+    String decodedToken = jsonDecode(token!);
+    int userID = decodedLoggedInUser["id"];
+
+    Map<String, dynamic> withdrawData = {
+      "amount": _amount,
+      "withdrawalChannel": _withdrawalChannel,
+      "account_number": _accountNumber,
+      "account_name": _accountName,
+      "bank_name": _bankName,
+      "otp": _otp,
+    };
+    debugPrint("WITHDRAWAL DATA:::: $withdrawData");
+
+    var response = await WalletAPI.verifyWithdrawMoneyService(verifyWithdrawMoneyRoute, userID, withdrawData, decodedToken);
+    bool isSuccess = response!.data["success"];
+    String message = response.data["message"];
+    // debugPrint("USER DATA:::: ${response.data["data"]}");
+
+    if (isSuccess) {
+      setIsLoading(false);
 
       Map<String, dynamic> responseData = response.data["data"];
       Map<String, dynamic> transactionData = responseData["transaction"];
       _transactionsStateController.setTransaction(transactionFromJson(transactionData));
 
+      setBottomSheetStep(3);
+      await getUserWallet();
+      await getUserReferralWallet();
       Get.back();
       Get.toNamed("/homeScreen");
 
       _appToastWidget.notification("Success!", message, "Success");
-
       // debugPrint("transactionData DATA:::: $transactionData");
     } else {
       setIsLoading(false);

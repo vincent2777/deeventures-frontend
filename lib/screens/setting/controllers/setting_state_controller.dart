@@ -135,25 +135,20 @@ class SettingStateController extends GetxController {
     String decodedToken = jsonDecode(token!);
     int userID = decodedLoggedInUser["id"];
 
-    print("decodedLoggedInUser $decodedLoggedInUser");
-
     if (confirmNewPassword == newPassword) {
       setIsLoading(true);
-
       // Prepare the request body
       Map<String, dynamic> updatePasswordData = {
         "old_password": _currentPassword,
         "new_password": _newPassword
       };
 
-      var response = await AuthAPI.updatePasswordService(
-          updatePasswordRoute, updatePasswordData, decodedToken, userID);
+      var response = await AuthAPI.updatePasswordService(updatePasswordRoute, updatePasswordData, decodedToken, userID);
       bool isSuccess = response!.data["success"];
 
       if (isSuccess) {
         setIsLoading(false);
-        _appToastWidget.notification(
-            "Password Changed!", response.data["message"], "Success");
+        _appToastWidget.notification("Password Changed!", response.data["message"], "Success");
         Future.delayed(const Duration(milliseconds: 500), () {
           loginStateController.logoutUser();
         });
@@ -185,21 +180,12 @@ class SettingStateController extends GetxController {
       "phone_number": _phoneNumber
     };
 
-    debugPrint("userUpdateData :::: $userUpdateData");
-    debugPrint("decodedToken :::: $decodedToken");
-
-    var response = await AuthAPI.updateUserService(
-        updateUserRoute, userUpdateData, decodedToken, userID);
-
-    debugPrint("response :::: $response");
-
+    var response = await AuthAPI.updateUserService(updateUserRoute, userUpdateData, decodedToken, userID);
     bool isSuccess = response!.data["success"];
 
     if (isSuccess) {
       setIsLoading(false);
-      _appToastWidget.notification(
-          "Profile Updated!", response.data["message"], "Success");
-
+      _appToastWidget.notification("Profile Updated!", response.data["message"], "Success");
       setUpdateLocalInfo(response.data["data"]);
     } else {
       setIsLoading(false);
@@ -216,18 +202,16 @@ class SettingStateController extends GetxController {
     String decodedToken = jsonDecode(token!);
     int userID = decodedLoggedInUser["id"];
 
-    print("decodedLoggedInUser $decodedLoggedInUser");
+    // debugPrint("decodedLoggedInUser $decodedLoggedInUser");
 
     setIsLoading(true);
 
-    var response = await AuthAPI.deleteUserService(
-        deleteUserRoute, decodedToken, userID);
+    var response = await AuthAPI.deleteUserService(deleteUserRoute, decodedToken, userID);
     bool isSuccess = response!.data["success"];
 
     if (isSuccess) {
       setIsLoading(false);
-      _appToastWidget.notification("Account Deleted",
-          response.data["message"], "Success");
+      _appToastWidget.notification("Account Deleted", response.data["message"], "Success");
       Future.delayed(const Duration(milliseconds: 500), () {
         loginStateController.logoutUser();
       });

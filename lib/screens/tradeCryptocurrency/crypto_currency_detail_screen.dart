@@ -57,7 +57,7 @@ class CryptocurrencyDetailScreen extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "NGN",
+                      "\$",
                       style: TextStyle(
                           color: Colors.grey.shade400
                       ),

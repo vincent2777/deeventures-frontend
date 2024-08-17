@@ -10,8 +10,7 @@ import 'controllers/trade_cryptocurrency_state_controller.dart';
 class TradeCryptocurrencyScreen extends StatelessWidget {
   TradeCryptocurrencyScreen({super.key});
 
-  final TradeCryptocurrencyStateController tradeCryptoCurrencyStateController =
-      Get.put(TradeCryptocurrencyStateController());
+  final TradeCryptocurrencyStateController tradeCryptoCurrencyStateController = Get.put(TradeCryptocurrencyStateController());
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
