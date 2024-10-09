@@ -54,6 +54,46 @@ class AuthAPI {
     }
   }
 
+  //  Forgot Password.
+  static Future<Response?> forgotPasswordService(String url, Map<String, dynamic> forgotPasswordData) async {
+    var fullURL = "$baseURL$url";
+    // debugPrint("URL::: $fullURL \n $forgotPasswordData");
+
+    try {
+      return await Dio().post(
+        fullURL,
+        data: forgotPasswordData,
+        options: Options(headers: _headers),
+      );
+    } on DioException catch (error) {
+      debugPrint("ERROR::: $error");
+      if (error.response != null) {
+        return error.response;
+      }
+      throw Exception(error.response);
+    }
+  }
+
+  //  Reset Password.
+  static Future<Response?> resetPasswordService(String url, Map<String, dynamic> resetPasswordData) async {
+    var fullURL = "$baseURL$url";
+    debugPrint("URL::: $fullURL \n $resetPasswordData");
+
+    try {
+      return await Dio().post(
+        fullURL,
+        data: resetPasswordData,
+        options: Options(headers: _headers),
+      );
+    } on DioException catch (error) {
+      debugPrint("ERROR::: $error");
+      if (error.response != null) {
+        return error.response;
+      }
+      throw Exception(error.response);
+    }
+  }
+
 
   //  Update User Password.
   static Future<Response?> updatePasswordService(String url, Map<String, dynamic> passwordData, String token, int userID) async {
@@ -128,4 +168,32 @@ class AuthAPI {
     }
   }
 
+  // Upload User profile image Proof.
+  static Future<Response?> uploadUserProfileImageService(String url, String userID, String imageFile, String token) async {
+    var fullURL = "$baseURL$url/$userID";
+    // debugPrint("URL::: $fullURL");
+
+    try {
+      FormData formData = FormData.fromMap({
+        "profileImage": await MultipartFile.fromFile(
+          imageFile,
+          filename: imageFile.split("/").last,
+        ),
+      });
+      return await Dio().post(
+        fullURL,
+        data: formData,
+        options: Options(headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        }),
+      );
+    } on DioException catch (e) {
+      if (e.response != null) {
+        return e.response;
+      }
+      throw Exception(e.response);
+    }
+  }
 }

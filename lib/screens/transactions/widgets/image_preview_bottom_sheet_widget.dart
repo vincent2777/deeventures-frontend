@@ -67,10 +67,29 @@ class ImagePreviewBottomSheetWidget {
                             const SizedBox(height: 20.0,),
 
                             // Image Preview
-                            Image.file(
+                            /*Image.file(
                               controller.pickedFile!,
                               height: 100.0,
                               fit: BoxFit.contain,
+                            ),*/
+                            Container(
+                              height: 100,
+                              padding: const EdgeInsets.all(8.0),
+                              child: GridView.builder(
+                                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3,
+                                  crossAxisSpacing: 4.0,
+                                  mainAxisSpacing: 4.0,
+                                ),
+                                itemCount: controller.pickedFiles.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Image.file(
+                                    controller.pickedFiles[index]!,
+                                    height: 100.0,
+                                    fit: BoxFit.cover,
+                                  );
+                                },
+                              ),
                             ),
                             const SizedBox(height: 20.0,),
 
@@ -86,13 +105,17 @@ class ImagePreviewBottomSheetWidget {
                                     borderRadius: BorderRadius.circular(7.0),
                                   )
                               ),
-                              child: const Text(
-                                "Submit",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.w600
-                                ),
+                              child: !controller.isLoading ? (
+                                  const Text(
+                                    "Submit",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.w600
+                                    ),
+                                  )) : const SpinKitCircle(
+                                color: Colors.white,
+                                size: 40,
                               ),
                               /*Container(
                                     height: 50.0,
@@ -117,6 +140,8 @@ class ImagePreviewBottomSheetWidget {
       ),
     );
   }
+
+
   static void imagePreviewCardBottomSheetWidget() {
 
     Get.bottomSheet(

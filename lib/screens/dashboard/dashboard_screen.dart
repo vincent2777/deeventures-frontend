@@ -120,21 +120,27 @@ class DashboardScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: Row(
                         children: [
-                          const CircleAvatar(
-                            backgroundColor: Colors.white,
-                            backgroundImage: AssetImage("assets/images/profile_img.png"),
-                            radius: 30.0,
-                          ),
-                          const SizedBox(width: 10.0),
-
                           GetBuilder<GeneralStateController>(builder: (controller) {
-                            return Text(
-                              "Hello, ${controller.user.fullName != null ? controller.user.fullName!.split(" ")[0] : ''}",
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w600,
-                              ),
+                            return Row(
+                              children: [
+                                CircleAvatar(
+                                  backgroundColor: Colors.white,
+                                  backgroundImage: (controller.user.avatar != null && controller.user.avatar!.isNotEmpty)
+                                      ? NetworkImage(controller.user.avatar!)
+                                      : const AssetImage("assets/images/profile_img.png") as ImageProvider,
+                                  radius: 30.0,
+                                ),
+                                const SizedBox(width: 10.0),
+
+                                Text(
+                                  "Hello, ${controller.user.fullName != null ? controller.user.fullName!.split(" ")[0] : ''}",
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
                             );
                           }),
                           const Spacer(),
@@ -245,9 +251,9 @@ class DashboardScreen extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(10.0),
                                     )
                                 ),
-                                icon: Row(
+                                icon: const Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
-                                  children: const [
+                                  children: [
                                     Icon(
                                       Iconsax.gift,
                                       color: Colors.white,
@@ -281,9 +287,9 @@ class DashboardScreen extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(10.0),
                                     )
                                 ),
-                                icon: Row(
+                                icon: const Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
-                                  children: const [
+                                  children: [
                                     Icon(
                                       Iconsax.bitcoin_refresh,
                                       color: Colors.white,

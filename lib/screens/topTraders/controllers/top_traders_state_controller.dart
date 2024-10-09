@@ -77,7 +77,7 @@ class TopTradersStateController extends GetxController with GetSingleTickerProvi
 
     var response = await TopTradersAPI.getTopTradersService(topTradersPaginatedRoute ,decodedToken);
     bool isSuccess = response!.data["success"];
-    debugPrint("PROGRESS:::: ${response.data}");
+    // debugPrint("PROGRESS:::: ${response.data}");
 
     if (isSuccess) {
       setIsLoading(false);

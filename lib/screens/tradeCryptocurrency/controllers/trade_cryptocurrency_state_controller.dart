@@ -215,7 +215,7 @@ class TradeCryptocurrencyStateController extends GetxController {
 
     String? token = await _flutterSecureStorage.read(key: "token") ?? "";
     String decodedToken = jsonDecode(token);
-    debugPrint("TOKEN::: $decodedToken");
+    // debugPrint("TOKEN::: $decodedToken");
 
     Map<String, dynamic> sellCryptoData = {
       "user_id": decodedUser["id"],
@@ -229,12 +229,12 @@ class TradeCryptocurrencyStateController extends GetxController {
       "to_receive": _newCurrencyBuyRate,
       "currency": _currency.currencySymbol,
     };
-    debugPrint("TRANSACTION DATA::: $sellCryptoData");
+    // debugPrint("TRANSACTION DATA::: $sellCryptoData");
 
 
     var response = await CryptocurrencyAPI.sellCryptoService(sellCryptocurrencyRoute, sellCryptoData, decodedToken);
     bool isSuccess = response!.data["success"];
-    debugPrint("RESPONSE::: $response");
+    // debugPrint("RESPONSE::: $response");
 
     if (isSuccess) {
       setIsSellCryptoLoading(false);
@@ -242,7 +242,7 @@ class TradeCryptocurrencyStateController extends GetxController {
       Transaction transactionData = transactionFromJson(transactionResponse);
       setTransaction(transactionData);
       _transactionsStateController.setTransaction(transactionData);
-      debugPrint("PROGRESS:::: $response");
+      // debugPrint("PROGRESS:::: $response");
       setShowQRCode(true);
     } else {
       setIsSellCryptoLoading(false);

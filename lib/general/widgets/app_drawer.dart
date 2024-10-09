@@ -1,5 +1,6 @@
 import 'package:deeventures/general/controllers/general_state_controller.dart';
 import 'package:deeventures/general/models/drawer_item_model.dart';
+import 'package:deeventures/general/widgets/upload_profile_bottom_sheet_widget.dart';
 import 'package:deeventures/screens/auths/controllers/login_state_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,10 +16,8 @@ class AppDrawer extends StatelessWidget {
   final List<DrawerItem> _drawerItems = [
     DrawerItem(icon: Iconsax.home, title: "Home", route: homeScreen),
     DrawerItem(icon: Iconsax.align_vertically, title: "Top Trader", route: topTradersScreen),
-    // DrawerItem(icon: Iconsax.chart_1, title: "Leaderboard Info", route: leaderBoardScreen),
     DrawerItem(icon: Iconsax.moneys, title: "Make Money", route: makeMoneyScreen),
     DrawerItem(icon: Iconsax.sms_tracking, title: "Promo Code", route: promoScreen),
-    // DrawerItem(icon: Iconsax.notification, title: "Notification", route: notificationScreen),
     DrawerItem(icon: Iconsax.call_calling, title: "Customer Support", route: customerSupportScreen),
     DrawerItem(icon: Iconsax.setting_2, title: "Settings", route: settingsScreen),
     DrawerItem(icon: Iconsax.logout_14, title: "Logout", route: ""),
@@ -45,21 +44,56 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 20.0),
+          const SizedBox(height: 10.0),
 
           GetBuilder<GeneralStateController>(builder: (controller) {
-              return Row(
+              return Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
-                    height: 65.0,
-                    width: 65.0,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      image: const DecorationImage(image: AssetImage("assets/images/profile_img.png"))
+                  SizedBox(
+                    height: 90.0,
+                    width: 90.0,
+                    child: Stack(
+                      children: [
+                        Container(
+                          height: 80.0,
+                          width: 80.0,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              image: DecorationImage(
+                                image: (controller.user.avatar != "")
+                                    ? NetworkImage(controller.user.avatar!)
+                                    : const AssetImage("assets/images/profile_img.png") as ImageProvider,
+                                fit: BoxFit.cover
+                              )
+                          ),
+                        ),
+                        Positioned(
+                          bottom: -3.0,
+                          right: -5.0,
+                          child: IconButton(
+                          onPressed: () {
+                            debugPrint("UPLOAD BOTTOM SHEET");
+                            UploadProfileBottomSheetWidget.uploadProfileBottomSheetWidget();
+                          },
+                            icon: Container(
+                              height: 35.0,
+                              width: 35.0,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Colors.green.shade100
+                              ),
+                              child: const Icon(
+                                Iconsax.gallery_edit,
+                                size: 20.0,
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
                     ),
                   ),
-                  const SizedBox(width: 15.0),
+                  const SizedBox(height: 15.0),
 
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
